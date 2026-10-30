@@ -5,6 +5,8 @@ export default function JobCardsPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const cards = state?.cards ?? [];
+  const conversationId = state?.conversationId ?? null;
+  const lastUserMessage = state?.lastUserMessage;
 
   return (
     <div className="flex flex-col h-[100dvh] w-full bg-page-gradient relative overflow-hidden">
@@ -47,13 +49,13 @@ export default function JobCardsPage() {
 
         {/* The Message you sent */}
         <p className="text-white/90 text-center text-[15px] leading-relaxed mb-6 max-w-sm drop-shadow-sm">
-          Hi Zymm. Can you please do me the favor of exporting all my resumes that were used during the last week of my job hunt
-          <br/>
-          <span className="text-white/60 text-xs mt-2 block">curl: (56) Recv failure: Connection reset by peer</span>
+          {lastUserMessage || 'Tap the mic to keep talking with Zymm.'}
         </p>
 
         {/* Microphone */}
-        <button 
+        <button
+          aria-label="Keep talking with Zymm"
+          onClick={() => navigate('/assistant', { state: { conversationId } })}
           className="w-[64px] h-[64px] rounded-full bg-green-grad flex items-center justify-center opacity-90 shadow-[0_0_20px_rgba(34,197,94,0.4)] hover:opacity-100 active:scale-95 transition-all cursor-pointer"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

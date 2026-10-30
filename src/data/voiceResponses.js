@@ -14,3 +14,7 @@ export const conversationFlow = [
     nextSubtitle: "Providing Answer..."
   }
 ];
+
+// Demo mode only: what the "microphone" hears, in order. Live mode uses real speech-to-text instead.
+const DEMO_SCRIPT = ['Find me marketing jobs', 'In New York', 'At least 90k', 'Yes, go ahead'];
+export const mockUtterance = (userMessageCount) => DEMO_SCRIPT[userMessageCount % DEMO_SCRIPT.length];

@@ -1,9 +1,15 @@
+import EditableText from './EditableText';
+
 export default function ChatMessage({
   message,
   isUser,
   isAnimating,
   isHomepageChat = false,
   isOrbChat = false,
+  onEdit,
+  edited = false,
+  cards,
+  onOpenCards,
 }) {
   if (isUser) {
     return (
@@ -27,7 +33,7 @@ export default function ChatMessage({
               </svg>
             </div>
           )}
-          <p className="text-[15px] leading-relaxed">{message}</p>
+          <EditableText text={message} onSave={onEdit} edited={edited} textClassName="text-[15px] leading-relaxed" />
         </div>
       </div>
     );
@@ -45,6 +51,17 @@ export default function ChatMessage({
             {word}
           </span>
         ))}
+        {cards?.length > 0 && (
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={onOpenCards}
+              className="bg-green-grad rounded-full px-4 py-1.5 text-[12px] font-medium text-white cursor-pointer"
+            >
+              View {cards.length} job cards
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

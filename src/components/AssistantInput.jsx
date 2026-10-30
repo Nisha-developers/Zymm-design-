@@ -1,8 +1,9 @@
-export default function AssistantInput({ onMicClick, onMessageClick }) {
+export default function AssistantInput({ onMicClick, onMessageClick, isListening = false }) {
   return (
     <div className="flex items-center justify-center w-full px-6 pb-10 pt-2 shrink-0 relative z-10 gap-6">
       <button 
         onClick={onMessageClick}
+        aria-label="Open text chat"
         className="w-[64px] h-[64px] rounded-full border border-white/50 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all cursor-pointer shadow-sm"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -14,7 +15,9 @@ export default function AssistantInput({ onMicClick, onMessageClick }) {
 
       <button 
         onClick={onMicClick}
-        className="w-[64px] h-[64px] rounded-full bg-input-grad flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.3)] active:scale-95 transition-all cursor-pointer"
+        aria-label={isListening ? 'Stop listening' : 'Talk to Zymm'}
+        aria-pressed={isListening}
+        className={`w-[64px] h-[64px] rounded-full bg-input-grad flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.3)] active:scale-95 transition-all cursor-pointer ${isListening ? 'ring-4 ring-green-400/60' : ''}`}
       >
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>

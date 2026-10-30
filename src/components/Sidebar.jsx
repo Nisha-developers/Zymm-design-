@@ -1,4 +1,35 @@
+import { useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import IconWrapper from './IconWrapper';
+import { groupConversations, useConversations } from '../lib/chatStore';
+
+const PREVIEW = 5;
+
+function Section({ title, items, empty, onOpen, activeId, last = false, footer }) {
+  return (
+    <div className={last ? '' : 'mb-8'}>
+      <h3 className="text-[13px] font-bold mb-3">{title}</h3>
+      <ul className="flex flex-col gap-2 text-[13px] font-medium">
+        {items.length === 0 ? (
+          <li className="opacity-40">{empty}</li>
+        ) : (
+          items.map((chat) => (
+            <li key={chat.id}>
+              <button
+                type="button"
+                onClick={() => onOpen(chat)}
+                className={`w-full cursor-pointer truncate text-left hover:opacity-70 ${chat.id === activeId ? 'font-bold' : ''}`}
+              >
+                {chat.title}
+              </button>
+            </li>
+          ))
+        )}
+      </ul>
+      {footer}
+    </div>
+  );
+}
 
 export default function Sidebar({
   isOpen,
@@ -6,6 +37,19 @@ export default function Sidebar({
   onToggle,
   showToggle = true,
 }) {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const conversations = useConversations();
+  const [showAll, setShowAll] = useState(false);
+  const { actionable, chats, tasks } = useMemo(() => groupConversations(conversations), [conversations]);
+  const activeId = pathname.startsWith('/topics/') ? pathname.slice('/topics/'.length) : null;
+  const visible = (list) => (showAll ? list : list.slice(0, PREVIEW));
+
+  const open = (chat) => {
+    navigate(`/topics/${chat.id}`);
+    if (window.matchMedia?.('(max-width: 767px)').matches) onClose();
+  };
+
   return (
     <>
       {/* Mobile Overlay Background */}
@@ -67,45 +111,27 @@ export default function Sidebar({
         {/* Scrollable Lists Area */}
         <div className="flex-1 overflow-y-auto px-6 pb-6 text-[#2E2E3E]">
           
-          {/* Section 1 */}
-          <div className="mb-8">
-            <h3 className="text-[13px] font-bold mb-3">Actionable Requests</h3>
-            <ul className="flex flex-col gap-2 text-[13px] font-medium">
-              <li className="cursor-pointer hover:opacity-70">Restructure entire resume</li>
-              <li className="cursor-pointer hover:opacity-70">Email hiring manager</li>
-              <li className="cursor-pointer hover:opacity-70">Start New Campaign</li>
-              <li className="cursor-pointer hover:opacity-70">Email hiring manager</li>
-              <li className="cursor-pointer hover:opacity-70">Metric Weekly Reporting</li>
-            </ul>
-          </div>
-
-          {/* Section 2 */}
-          <div className="mb-8">
-            <h3 className="text-[13px] font-bold mb-3">Recent Chats</h3>
-            <ul className="flex flex-col gap-2 text-[13px] font-medium">
-              <li className="cursor-pointer hover:opacity-70">Restructure entire resume</li>
-              <li className="cursor-pointer hover:opacity-70">Email hiring manager</li>
-              <li className="cursor-pointer hover:opacity-70">Start New Campaign</li>
-              <li className="cursor-pointer hover:opacity-70">Email hiring manager</li>
-              <li className="cursor-pointer hover:opacity-70">Metric Weekly Reporting</li>
-            </ul>
-          </div>
-
-          {/* Section 3 */}
-          <div>
-            <h3 className="text-[13px] font-bold mb-3">Recent Task Requests</h3>
-            <ul className="flex flex-col gap-2 text-[13px] font-medium">
-              <li className="cursor-pointer hover:opacity-70">Restructure entire resume</li>
-              <li className="cursor-pointer hover:opacity-70">Email hiring manager</li>
-              <li className="cursor-pointer hover:opacity-70">Start New Campaign</li>
-              <li className="cursor-pointer hover:opacity-70">Email hiring manager</li>
-              <li className="cursor-pointer hover:opacity-70">Weekly Performance Reporting</li>
-            </ul>
-            {/* Faded See all text at bottom */}
-            <p className="mt-4 text-[13px] font-medium text-black/30 cursor-pointer">
-              See all...
-            </p>
-          </div>
+          <Section title="Actionable Requests" items={visible(actionable)} empty="No tasks running" onOpen={open} activeId={activeId} />
+          <Section title="Recent Chats" items={visible(chats)} empty="No chats yet" onOpen={open} activeId={activeId} />
+          <Section
+            title="Recent Task Requests"
+            items={visible(tasks)}
+            empty="No tasks yet"
+            onOpen={open}
+            activeId={activeId}
+            last
+            footer={
+              (chats.length > PREVIEW || tasks.length > PREVIEW || actionable.length > PREVIEW) && (
+                <button
+                  type="button"
+                  onClick={() => setShowAll((previous) => !previous)}
+                  className="mt-4 cursor-pointer text-[13px] font-medium text-black/30"
+                >
+                  {showAll ? 'Show less' : 'See all...'}
+                </button>
+              )
+            }
+          />
 
         </div>
       </aside>

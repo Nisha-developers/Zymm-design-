@@ -1,4 +1,15 @@
+import { useState } from 'react';
+import { isApplied, startApplication } from '../lib/applyTask';
+
 export default function JobCard({ job, index, total }) {
+  // idle -> confirm (ask first, never apply by accident) -> applied
+  const [step, setStep] = useState(() => (isApplied(job) ? 'applied' : 'idle'));
+
+  const confirmApply = () => {
+    startApplication(job);
+    setStep('applied');
+  };
+
   return (
     <div 
       className="w-[calc(100%-2rem)] sm:w-[80%] max-w-[600px] h-auto rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row shadow-sm relative overflow-hidden shrink-0 mb-10"
@@ -40,10 +51,26 @@ export default function JobCard({ job, index, total }) {
         </div>
 
         {/* Auto Apply Button */}
-        <div className="mt-auto flex justify-end">
-          <button className="bg-white/90 text-black px-4 py-1.5 rounded text-[11px] sm:text-xs font-semibold hover:bg-white active:scale-95 transition-all">
-            Auto Apply
-          </button>
+        <div className="mt-auto flex items-center justify-end gap-2">
+          {step === 'confirm' ? (
+            <>
+              <span className="text-white/80 text-[11px] sm:text-xs">Send application?</span>
+              <button onClick={confirmApply} className="bg-white/90 text-black px-4 py-1.5 rounded text-[11px] sm:text-xs font-semibold hover:bg-white active:scale-95 transition-all">
+                Yes
+              </button>
+              <button onClick={() => setStep('idle')} className="bg-white/40 text-black px-4 py-1.5 rounded text-[11px] sm:text-xs font-semibold hover:bg-white/60 active:scale-95 transition-all">
+                Cancel
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => step === 'idle' && setStep('confirm')}
+              disabled={step === 'applied'}
+              className="bg-white/90 text-black px-4 py-1.5 rounded text-[11px] sm:text-xs font-semibold hover:bg-white active:scale-95 transition-all disabled:opacity-60 disabled:active:scale-100"
+            >
+              {step === 'applied' ? 'Applied ✓' : 'Auto Apply'}
+            </button>
+          )}
         </div>
       </div>
     </div>
