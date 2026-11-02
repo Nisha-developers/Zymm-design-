@@ -36,9 +36,10 @@ export default function AssistantPage({ onMenuClick }) {
 
   const conv = conversations.find((chat) => chat.id === convId) ?? null;
   const messages = conv?.messages ?? [];
-  const hasStartedChat = messages.some((m) => m.role === 'user');
+  // Only the current exchange fits on this screen; the chat button opens the full conversation.
+  const lastUserIndex = messages.findLastIndex((m) => m.role === 'user');
   const history = messages.length
-    ? messages.map((m) => ({ id: m.id, sender: m.role, text: m.text, edited: m.edited, cards: m.cards }))
+    ? messages.slice(Math.max(lastUserIndex, 0)).map((m) => ({ id: m.id, sender: m.role, text: m.text, edited: m.edited, cards: m.cards }))
     : [{ sender: 'bot', text: GREETING }];
 
   useEffect(() => {
@@ -140,7 +141,7 @@ export default function AssistantPage({ onMenuClick }) {
   const handleOpenChat = () => navigate(`/topics/${ensureConversation()}`);
 
   return (
-    <div className="relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden bg-page-gradient">
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-page-gradient">
       <div className="shrink-0">
         <AssistantHeader
           title="Personal Assistant"
@@ -150,8 +151,8 @@ export default function AssistantPage({ onMenuClick }) {
         />
       </div>
 
-      <div className="mt-2 mb-2 shrink-0">
-        <Orb isChatStarted={hasStartedChat} state={voice} levelRef={levelRef} />
+      <div className="mt-[clamp(8px,3dvh,32px)] shrink-0">
+        <Orb state={voice} levelRef={levelRef} />
       </div>
 
       <ChatHistory history={history} onEdit={voice === 'processing' ? undefined : handleEdit} onOpenCards={handleOpenCards} />
@@ -160,6 +161,7 @@ export default function AssistantPage({ onMenuClick }) {
         <AssistantInput
           onMicClick={handleMicClick}
           onMessageClick={handleOpenChat}
+          onClose={() => navigate('/')}
           isListening={voice === 'listening'}
         />
       </div>

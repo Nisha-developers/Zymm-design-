@@ -13,14 +13,14 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
   }, [history]);
 
   return (
-    <div ref={chatRef} className="mx-auto h-[30vh] min-h-[140px] max-h-[320px] w-full max-w-md overflow-y-auto px-4 pb-6 hide-scrollbar flex flex-col gap-6">
+    <div ref={chatRef} className="mx-auto min-h-0 w-full max-w-md flex-1 overflow-y-auto px-6 pt-4 hide-scrollbar flex flex-col gap-3">
       {history.map((msg, idx) => (
         <div 
           key={msg.id ?? idx}
-          className={`flex max-w-[85%] flex-col ${msg.sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`}
+          className={`flex max-w-full flex-col ${msg.sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`}
         >
           {msg.sender === 'user' ? (
-            <div className="mr-0 rounded-xl bg-[#1A1A1A] p-4 text-[15px] leading-relaxed text-white shadow-md lg:mr-10">
+            <div className="rounded-xl bg-[#1A1A1A] px-4 py-3 text-[15px] leading-snug text-white shadow-md">
               <EditableText
                 text={msg.text}
                 edited={msg.edited}
@@ -28,7 +28,7 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
               />
             </div>
           ) : (
-            <div className="text-white/90 text-[16px] leading-relaxed whitespace-pre-wrap lg:px-10 lg:py-6">
+            <div className="text-white text-[17px] font-medium leading-snug whitespace-pre-wrap [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
               {msg.text}
               {msg.cards?.length > 0 && (
                 <div className="mt-3">

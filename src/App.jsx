@@ -46,7 +46,7 @@ function PageLayout({
       : children;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-[100dvh]">
       {showSidebar && (
         <Sidebar
           isOpen={isSidebarOpen}

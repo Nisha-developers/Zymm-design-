@@ -1,12 +1,13 @@
 export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }) {
   return (
-    <div className="flex flex-col items-center w-full px-4 pt-6">
+    <div className="flex flex-col items-center w-full px-6 pt-[clamp(12px,4dvh,40px)]">
       {/* Top Nav Bar (Back, Title, Menu) */}
       <div className="flex w-full max-w-md items-center justify-between gap-3">
         {/* Back Button */}
         <button 
           onClick={onBack}
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-input-grad shadow-sm cursor-pointer"
+          aria-label="Go back"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-input-grad shadow-sm cursor-pointer"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -22,7 +23,7 @@ export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }
         <button 
           onClick={onMenuClick}
           aria-label="Toggle sidebar"
-          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-input-grad shadow-sm cursor-pointer"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-input-grad shadow-sm cursor-pointer"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -34,7 +35,7 @@ export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }
 
       {/* Subtitle (Listening...) */}
       {subtitle && (
-        <p className="text-gray-400 text-[15px] mt-3 font-medium">
+        <p className="text-[#3FE0A5] text-[15px] mt-1 font-medium">
           {subtitle}
         </p>
       )}
