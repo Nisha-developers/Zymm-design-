@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { recoverStaleTasks } from './lib/chatStore'
+import { initTheme } from './lib/theme'
 
 recoverStaleTasks()
 createRoot(document.getElementById('root')).render(
