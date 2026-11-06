@@ -141,6 +141,22 @@ export default function Sidebar({
           />
 
         </div>
+                {/* Theme switch (end of sidebar) */}
+        <div className="w-[280px] shrink-0 border-t border-black/10 p-6 dark:border-white/10 md:w-[320px]">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            role="switch"
+            aria-checked={theme === 'dark'}
+            aria-label="Toggle dark mode"
+            className="flex w-full cursor-pointer items-center justify-between text-[13px] font-medium text-[#2E2E3E] dark:text-white"
+          >
+            <span>{theme === 'dark' ? 'Dark mode' : 'Light mode'}</span>
+            <span className={`relative h-6 w-11 rounded-full transition-colors ${theme === 'dark' ? 'bg-[#3C3C3C]' : 'bg-black/20'}`}>
+              <span className={`absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${theme === 'dark' ? 'translate-x-5' : ''}`} />
+            </span>
+          </button>
+        </div>
       </aside>
     </>
   );
