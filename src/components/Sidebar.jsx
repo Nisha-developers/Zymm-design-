@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import IconWrapper from './IconWrapper';
 import { groupConversations, useConversations } from '../lib/chatStore';
+import { applyTheme, getTheme } from '../lib/theme';
 
 const PREVIEW = 5;
 
@@ -41,6 +42,12 @@ export default function Sidebar({
   const { pathname } = useLocation();
   const conversations = useConversations();
   const [showAll, setShowAll] = useState(false);
+    const [theme, setTheme] = useState(getTheme);
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    setTheme(next);
+  };
   const { actionable, chats, tasks } = useMemo(() => groupConversations(conversations), [conversations]);
   const activeId = pathname.startsWith('/topics/') ? pathname.slice('/topics/'.length) : null;
   const visible = (list) => (showAll ? list : list.slice(0, PREVIEW));
@@ -63,7 +70,7 @@ export default function Sidebar({
       {/* Sidebar Container */}
       <aside
         className={`
-          fixed z-50 flex flex-col bg-white/60 backdrop-blur-xl 
+          fixed z-50 flex flex-col bg-white/60 backdrop-blur-xl dark:md:bg-white/5 dark:border-white/10 dark:bg-black/60
           border-r border-white/40 shadow-2xl
           transition-transform duration-300 ease-in-out
           
