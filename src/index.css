@@ -50,3 +50,6 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.dark {
+  --background-image-page-gradient: linear-gradient(147.2deg, #0B0B0F 24.53%, #17171D 44.18%, #2A2A33 65.44%);
+}
