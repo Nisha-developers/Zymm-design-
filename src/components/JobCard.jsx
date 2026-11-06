@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { isApplied, startApplication } from '../lib/applyTask';
 
 export default function JobCard({ job, index, total }) {
-  // idle -> confirm (ask first, never apply by accident) -> applied
   const [step, setStep] = useState(() => (isApplied(job) ? 'applied' : 'idle'));
 
   const confirmApply = () => {
@@ -12,7 +11,7 @@ export default function JobCard({ job, index, total }) {
 
   return (
     <div 
-      className="w-[calc(100%-2rem)] sm:w-[80%] max-w-[600px] h-[260px] sm:h-auto rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row relative overflow-hidden shrink-0 mb-10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.35)]"
+      className="w-[calc(100%-2rem)] sm:w-[80%] max-w-[600px] h-[280px] sm:h-auto rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row relative overflow-hidden shrink-0 mb-10 backdrop-blur-xl border border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.35)]"
       style={{
         background:
           'radial-gradient(120% 90% at 0% 0%, rgba(250,139,255,0.28), transparent 55%), radial-gradient(120% 90% at 100% 100%, rgba(44,255,136,0.22), transparent 55%), rgba(24,24,32,0.55)',
@@ -25,7 +24,7 @@ export default function JobCard({ job, index, total }) {
       <div className="flex flex-col w-full md:w-[45%] shrink-0 relative z-10 min-h-0">
         <h2 className="text-white text-xl sm:text-2xl md:text-[26px] font-semibold tracking-tight leading-tight mb-3 sm:mb-4 shrink-0">{job.title}</h2>
         
-        <div className="flex flex-col gap-1.5 mb-3 sm:mb-6 overflow-y-auto md:overflow-visible hide-scrollbar min-h-0 md:min-h-fit">
+        <div className="flex flex-col gap-1.5 mb-3 sm:mb-6 md:overflow-visible min-h-0 md:min-h-fit">
           <p className="text-base sm:text-lg font-semibold text-white/90">{job.company}</p>
           <p className="text-sm sm:text-base text-white/70">{job.location}</p>
           <p className="text-sm sm:text-base text-white/70">{job.salary}</p>
@@ -50,7 +49,8 @@ export default function JobCard({ job, index, total }) {
       <div className="flex flex-col flex-1 relative z-10 min-h-0">
         <h3 className="text-white text-base sm:text-lg font-semibold tracking-tight mb-2 shrink-0">Description</h3>
         
-        <div className="text-white/75 text-[13px] sm:text-sm leading-relaxed overflow-y-auto md:overflow-visible hide-scrollbar mb-3 md:mb-4 flex-1 md:flex-initial min-h-0 max-h-[120px] sm:max-h-[160px] md:max-h-none">
+        {/* Scroll container — mobile only bounded & scrollable */}
+        <div className="text-white/75 text-[13px] sm:text-sm leading-relaxed hide-scrollbar mb-3 md:mb-4 flex-1 min-h-0 overflow-y-auto md:overflow-visible md:max-h-none touch-pan-y">
           <p className="mb-2">{job.description}</p>
         </div>
 
@@ -79,4 +79,4 @@ export default function JobCard({ job, index, total }) {
       </div>
     </div>
   );
-      }
+                }
