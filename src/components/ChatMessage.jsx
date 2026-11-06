@@ -1,5 +1,5 @@
 import EditableText from './EditableText';
-import ring from '../assets/ring.png';
+import ring from '../assets/bbed32f2f3119cfca2c86478d38b659a704bf6e4.png';
 
 export default function ChatMessage({
   message,
