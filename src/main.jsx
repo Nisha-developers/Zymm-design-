@@ -7,6 +7,7 @@ import { recoverStaleTasks } from './lib/chatStore'
 import { initTheme } from './lib/theme'
 
 recoverStaleTasks()
+initTheme()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
