@@ -116,7 +116,7 @@ export default function Sidebar({
         </div>
 
         {/* Scrollable Lists Area */}
-        <div className="flex-1 overflow-y-auto px-6 pb-6 text-[#2E2E3E]">
+        <div className="flex-1 overflow-y-auto px-6 pb-6 dark:text-white text-[#2E2E3E]">
           
           <Section title="Actionable Requests" items={visible(actionable)} empty="No tasks running" onOpen={open} activeId={activeId} />
           <Section title="Recent Chats" items={visible(chats)} empty="No chats yet" onOpen={open} activeId={activeId} />
