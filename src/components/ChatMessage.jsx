@@ -1,4 +1,5 @@
 import EditableText from './EditableText';
+import ring from '../assets/ring.png';
 
 export default function ChatMessage({
   message,
@@ -14,17 +15,7 @@ export default function ChatMessage({
   if (isUser) {
     return (
       <div className="flex justify-end mb-6">
-        <div
-          className={`${isOrbChat ? 'text-[#1B1B1B]' : isHomepageChat ? 'bg-[#C8FE97] text-[#2E2E3E]' : 'bg-[#2E2E3E] text-white'} rounded-3xl rounded-tr-sm p-4 min-w-[200px] max-w-[70%] shadow-lg wrap-break-word`}
-          style={
-            isOrbChat
-              ? {
-                  background:
-                    'linear-gradient(185.75deg, #E3FFDC 10.61%, #D0FFFE 46.09%, #818181 95.42%)',
-                }
-              : undefined
-          }
-        >
+                <div className="bg-black text-white rounded-3xl rounded-tr-sm p-4 min-w-[200px] max-w-[70%] shadow-lg wrap-break-word">
           {!isHomepageChat && !isOrbChat && (
             <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mb-3">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
