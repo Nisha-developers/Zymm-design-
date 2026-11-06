@@ -30,7 +30,7 @@ export default function BottomInput({ onSend, voiceChatId = null }) {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-full h-[52px] rounded-full px-5 text-gray-900 bg-white dark:bg-[#2A2A33] dark:text-white placeholder-white/60 outline-none border-[#303030] shadow-inner"
+          className="w-full h-[52px] rounded-full px-5 text-gray-900 bg-white dark:bg-[#ddd] dark:text-white placeholder-white/60 outline-none border-[#303030] shadow-inner"
           placeholder=""
         />
       </div>
