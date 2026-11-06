@@ -1,4 +1,4 @@
-@import "tailwindcss";
+w@import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -53,5 +53,17 @@ body {
 .dark {
   --background-image-page-gradient: linear-gradient(147.2deg, #0B0B0F 24.53%, #17171D 44.18%, #2A2A33 65.44%);
 }
-
+/* Job card top bar: colour sweep moving left to right */
+@keyframes bar-flow {
+  from { background-position: 0% 0; }
+  to   { background-position: -200% 0; }
+}
+.card-bar {
+  background-image: linear-gradient(90deg, #5FE054, #C8E033, #A09A8C, #A244F2, #D83BB8, #E8407A, #D83BB8, #A244F2, #A09A8C, #C8E033, #5FE054);
+  background-size: 200% 100%;
+  animation: bar-flow 4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-bar { animation: none; }
+}
   /* Dark mode page gradient */
