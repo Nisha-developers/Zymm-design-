@@ -15,7 +15,7 @@ export default function ChatMessage({
   if (isUser) {
     return (
       <div className="flex justify-end mb-6">
-                <div className="bg-black text-white rounded-lg p-4 min-w-[200px] max-w-[70%] shadow-lg wrap-break-word">
+                <div className="bg-black dark:bg-[#2A2A33]  text-white rounded-lg p-4 min-w-[200px] max-w-[70%] shadow-lg wrap-break-word">
           {!isHomepageChat && !isOrbChat && (
             <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mb-3">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
