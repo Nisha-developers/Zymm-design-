@@ -35,7 +35,7 @@ export default function ChatMessage({
       <div className="flex shrink-0 items-center justify-center rounded-md bg-transparent">
         <img src={ring} alt="" className="h-8 w-8 object-contain" />
       </div>
-      <div className="max-w-[85%] text-[15px] leading-relaxed text-[#1B1B1B]">
+      <div className="max-w-[85%] text-[15px] leading-relaxed text-[#1B1B1B] dark:text-white">
         {message.map((word, index) => (
           <span
             key={index}
