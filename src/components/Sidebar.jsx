@@ -132,7 +132,7 @@ export default function Sidebar({
                 <button
                   type="button"
                   onClick={() => setShowAll((previous) => !previous)}
-                  className="mt-4 cursor-pointer text-[13px] font-medium text-black/30"
+                  className="mt-4 cursor-pointer text-[13px] font-medium text-black/30 dark:text-white/40."
                 >
                   {showAll ? 'Show less' : 'See all...'}
                 </button>
