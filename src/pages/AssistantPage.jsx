@@ -19,6 +19,7 @@ const SUBTITLES = {
   processing: 'Providing Answer...',
   speaking: 'Zymm is speaking..',
   error: 'Something went wrong. Tap the mic to try again.',
+  connecting: 'Connecting..',
 };
 
 export default function AssistantPage({ onMenuClick }) {
@@ -106,6 +107,7 @@ export default function AssistantPage({ onMenuClick }) {
     cancelSpeech.current?.(); // tapping while Zymm speaks interrupts it
     cancelSpeech.current = null;
     setNotice('');
+      setVoice('connecting');
     micStarting.current = true; // a second tap while the mic opens must not open another stream
     try {
       stopMic.current = await startMic(setLevel);
@@ -139,6 +141,7 @@ export default function AssistantPage({ onMenuClick }) {
   };
 
   const handleOpenChat = () => navigate(`/topics/${ensureConversation()}`);
+  const hasStartedConversation = messages.some((message) => message.role === 'user');
 
   return (
     <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-page-gradient">
@@ -151,8 +154,18 @@ export default function AssistantPage({ onMenuClick }) {
         />
       </div>
 
-      <div className="mt-[clamp(8px,3dvh,32px)] shrink-0">
-        <Orb state={voice} levelRef={levelRef} />
+      <div
+        className={`shrink-0 transition-[margin] duration-500 ease-out ${
+          voice !== 'idle' || hasStartedConversation
+            ? 'mt-[clamp(4px,1dvh,12px)]'
+            : 'mt-[clamp(8px,3dvh,32px)]'
+        }`}
+      >
+        <Orb
+          state={voice}
+          levelRef={levelRef}
+          compact={voice !== 'idle' || hasStartedConversation}
+        />
       </div>
 
       <ChatHistory history={history} onEdit={voice === 'processing' ? undefined : handleEdit} onOpenCards={handleOpenCards} />
