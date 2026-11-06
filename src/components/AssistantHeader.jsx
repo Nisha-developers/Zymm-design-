@@ -16,7 +16,7 @@ export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }
         </button>
 
         {/* Title */}
-        <h2 className="whitespace-nowrap text-black text-[17px] font-medium tracking-wide">
+        <h2 className="whitespace-nowrap text-black text-[17px] dark:text-white font-medium tracking-wide">
             {title}
         </h2>
 
