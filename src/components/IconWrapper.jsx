@@ -10,7 +10,7 @@ export default function IconWrapper({
       type={type}
       onClick={onClick}
       aria-label={ariaLabel}
-      className={`relative flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full transition-all cursor-pointer ${
+      className={`relative flex h-[44px] w-[44px] shrink-0 items-center dark:bg-white/10 dark:text-white dark:hover:bg-white/20' justify-center rounded-full transition-all cursor-pointer ${
         variant === 'gradient'
           ? 'bg-input-grad text-white shadow-sm'
           : 'bg-white/90 text-gray-700 hover:bg-white'
