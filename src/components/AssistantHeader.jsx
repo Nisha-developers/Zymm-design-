@@ -7,7 +7,7 @@ export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }
         <button 
           onClick={onBack}
           aria-label="Go back"
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-transparent shadow-sm cursor-pointer border border-gray-200"
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-transparent shadow-sm cursor-pointer border border-[#BAD5D1]"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="gray" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12"></line>
