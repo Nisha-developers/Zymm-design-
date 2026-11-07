@@ -11,6 +11,7 @@ export default function ChatMessage({
   edited = false,
   cards,
   onOpenCards,
+  isFirstMessage = false,
 }) {
   if (isUser) {
     return (
