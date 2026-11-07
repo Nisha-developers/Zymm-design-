@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // A message the user can fix (for example when the microphone heard the wrong words). Saving resends it.
-export default function EditableText({ text, onSave, edited = false, textClassName = '' }) {
+export default function EditableText({ text, onSave, edited = false, textClassName = '', writeEdit }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(text);
 
@@ -43,7 +43,7 @@ export default function EditableText({ text, onSave, edited = false, textClassNa
       {onSave && (
         <div className="mt-2 flex items-center justify-end gap-2 text-[11px] opacity-60">
           {edited && <span>edited</span>}
-          <button
+          {writeEdit && <button
             type="button"
             aria-label="Edit message"
             onClick={() => {
@@ -57,7 +57,8 @@ export default function EditableText({ text, onSave, edited = false, textClassNa
               <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
             </svg>
             Edit
-          </button>
+          </button>}
+          
         </div>
       )}
     </>
