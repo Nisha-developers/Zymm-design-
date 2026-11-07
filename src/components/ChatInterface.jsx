@@ -89,6 +89,7 @@ export default function ChatInterface({
             isAnimating={animatingMessageId === msg.id}
             isHomepageChat={isHomepageChat}
             isOrbChat={isOrbChat}
+            isFirstMessage={i === 0}
             onEdit={msg.role === 'user' && !isProcessing ? (text) => handleEdit(msg.id, text) : undefined}
             edited={msg.edited}
             cards={msg.cards}
