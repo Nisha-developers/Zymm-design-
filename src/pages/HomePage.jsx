@@ -10,7 +10,7 @@ export default function HomePage() {
       <ChatInterface
         isHomepageChat
         emptyState={
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1">
             <Header />
             <PromptPills />
             <PopularTopics />
