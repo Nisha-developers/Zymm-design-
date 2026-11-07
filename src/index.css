@@ -3,7 +3,7 @@
 
 @theme {
   /* Exact background gradient from your spec */
-  --background-image-page-gradient: linear-gradient(147.2deg, #FFFFFF 24.53%, #DFD9D9 44.18%, #9F9E9E 65.44%);
+  --background-image-page-gradient: #EEEEEE;
   
   /* Green button & circle gradient */
   --background-image-green-grad: linear-gradient(91.37deg, #C5F0CB 10.85%, #A1C4A6 49%, #718A75 100%);
