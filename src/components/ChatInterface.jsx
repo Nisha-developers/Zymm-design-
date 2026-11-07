@@ -81,7 +81,7 @@ export default function ChatInterface({
     <div className="flex min-h-screen flex-col">
       <div className={`px-4 ${isHomepageChat && messages.length === 0 ? '' : 'pt-20'} pb-28`}>
         {messages.length === 0 && emptyState}
-        {messages.map((msg) => (
+                {messages.map((msg, i) => (
           <ChatMessage
             key={msg.id}
             message={msg.role === 'bot' ? msg.text.split(/\s+/) : msg.text}
