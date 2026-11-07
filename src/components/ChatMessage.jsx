@@ -17,9 +17,9 @@ export default function ChatMessage({
     return (
       <div className="flex justify-end mb-6">
                 <div className="bg-black dark:bg-white dark:text-black text-white rounded-lg p-4 min-w-[200px] max-w-[70%] shadow-lg wrap-break-word">
-                    {isFirstMessage && !isHomepageChat && !isOrbChat && (
-            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mb-3">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              {isFirstMessage && !isHomepageChat && !isOrbChat && (
+            <div className="w-8 h-8 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center mb-3 text-black dark:text-white">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                 <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
               </svg>
