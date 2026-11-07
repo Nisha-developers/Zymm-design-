@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-
+import EditableText from './EditableText';
 export default function ChatHistory({ history, onEdit, onOpenCards }) {
   const chatRef = useRef(null);
 
@@ -20,7 +20,11 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
         >
           {msg.sender === 'user' ? (
             <div className="rounded-xl bg-[#1A1A1A] px-4 py-3 text-[15px] leading-snug text-white shadow-md">
-              
+              <EditableText
+                text={msg.text}
+                edited={msg.edited}
+                onSave={onEdit && msg.id ? (text) => onEdit(msg.id, text) : undefined}
+              />
             </div>
           ) : (
             <div className="text-white text-[17px] font-medium leading-snug whitespace-pre-wrap [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
