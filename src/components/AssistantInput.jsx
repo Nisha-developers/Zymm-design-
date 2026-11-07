@@ -26,7 +26,7 @@ export default function AssistantInput({ onMicClick, onMessageClick, onClose, is
  <button 
         onClick={onMessageClick}
         aria-label="Open text chat"
-        className="w-12 h-12 rounded-full  flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all cursor-pointer"
+        className="w-24 h-24 rounded-full  flex items-center justify-center text-white hover:bg-white/20 active:scale-95 transition-all cursor-pointer"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
