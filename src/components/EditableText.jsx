@@ -42,7 +42,7 @@ export default function EditableText({ text, onSave, edited = false, textClassNa
       <p className={textClassName}>{text}</p>
       {onSave && (
         <div className="mt-2 flex items-center justify-end gap-2 text-[11px] opacity-60">
-          {edited && <span>edited</span>}
+          {!edited && <span>edited</span>}
           {writeEdit && <button
             type="button"
             aria-label="Edit message"
