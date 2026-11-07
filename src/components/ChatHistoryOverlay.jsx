@@ -24,7 +24,7 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
                 text={msg.text}
                 edited={msg.edited}
                 onSave={onEdit && msg.id ? (text) => onEdit(msg.id, text) : undefined}
-                writeEdit={false}
+                writeEdit={true}
               />
             </div>
           ) : (
