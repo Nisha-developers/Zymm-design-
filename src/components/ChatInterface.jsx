@@ -104,7 +104,11 @@ export default function ChatInterface({
         )}
         <div ref={scrollRef} />
       </div>
-      <BottomInput onSend={handleSend} voiceChatId={convId} />
+            <BottomInput
+        onSend={handleSend}
+        voiceChatId={convId}
+        className={isHomepageChat && messages.length === 0 ? 'md:hidden' : ''}
+      />
     </div>
   );
 }
