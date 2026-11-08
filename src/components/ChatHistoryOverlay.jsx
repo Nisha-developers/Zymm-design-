@@ -28,7 +28,7 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
               />
             </div>
           ) : (
-            <div className="text-white text-[17px] font-medium leading-snug whitespace-pre-wrap [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
+            <div className="text-white text-[17px] md:text-[20px] md:text-center font-medium leading-snug whitespace-pre-wrap [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
               {msg.text}
               {msg.cards?.length > 0 && (
                 <div className="mt-3">
