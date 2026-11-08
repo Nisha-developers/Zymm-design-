@@ -21,7 +21,7 @@ setRepeatIcons((prev)=>[...prev, 5, 6, 7])
         <button className={`text-white text-[13px] cursor-pointer ${seeAll ? 'hidden' : ''} `} onClick={viewAll}>See all</button>
       </div>
 
-      <div className="grid grid-cols-2 gap-1">
+      <div className="grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-3">
         {repeatIcons.map((item) => (
           <button
             type="button"
