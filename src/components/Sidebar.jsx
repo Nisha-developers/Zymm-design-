@@ -70,8 +70,9 @@ export default function Sidebar({
       {/* Sidebar Container */}
       <aside
         className={`
-          fixed z-50 flex flex-col bg-white/60 backdrop-blur-xl dark:md:bg-white/5 dark:border-white/10 dark:bg-black/60
-          border-r border-white/40 shadow-2xl
+                    fixed z-50 flex flex-col backdrop-blur-xl
+          bg-white/60 border-r border-white/40 shadow-2xl
+          dark:bg-black dark:border-white/10
           transition-transform duration-300 ease-in-out
           
           /* Mobile Styles */
