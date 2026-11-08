@@ -80,7 +80,7 @@ export default function Sidebar({
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
           
           /* Desktop Styles */
-          md:sticky md:top-0 md:left-auto md:h-screen md:self-start md:shadow-none md:bg-white/30
+                    md:sticky md:top-0 md:left-auto md:h-screen md:self-start md:shadow-none md:bg-white/30 dark:md:bg-black
           ${isOpen ? 'md:w-[320px] md:translate-x-0' : 'md:w-0 md:-translate-x-full md:overflow-hidden'}
         `}
       >
