@@ -39,11 +39,17 @@ export default function DesktopHomeInput({ onSend, placeholder = 'Ask me anythin
           aria-label="Talk to Zymm"
           className="flex h-11 w-11 items-center justify-center rounded-full bg-black/5 dark:bg-white/10"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            <line x1="12" y1="19" x2="12" y2="22" />
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 136" fill="none">
+  <g fill="#E9FFB8">
+    <rect x="2" y="51.2" width="8" height="33.6" rx="4"/>
+    <rect x="18" y="34.4" width="8" height="67.2" rx="4"/>
+    <rect x="34" y="0" width="8" height="136.01" rx="4"/>
+    <rect x="50" y="25.6" width="8" height="84.8" rx="4"/>
+    <rect x="66" y="34.4" width="8" height="67.2" rx="4"/>
+    <rect x="82" y="27.2" width="8" height="81.6" rx="4"/>
+    <rect x="98" y="57.6" width="8" height="20.8" rx="4"/>
+  </g>
+</svg>
         </Link>
         <button
           type="submit"
