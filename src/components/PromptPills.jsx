@@ -11,7 +11,7 @@ export default function PromptPills() {
   ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 px-4 mb-8">
+    <div className="flex flex-wrap justify-center gap-2 px-4 mb-8 md:mt-6 md:max-w-[760px] md:gap-3 md:mb-0">
       {pills.map((text, idx) => (
         <button
           type="button"
