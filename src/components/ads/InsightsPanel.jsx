@@ -1,5 +1,5 @@
-import marvin from '../../assets/ads/marvin.png';
-import annia from '../../assets/ads/annia.png';
+import marvin from '../../assets/marvin.png';
+import annia from '../../assets/annia.png';
 
 /* ---------- helpers ---------- */
 const pt = (cx, cy, r, deg) => [cx + r * Math.cos((deg * Math.PI) / 180), cy - r * Math.sin((deg * Math.PI) / 180)];
