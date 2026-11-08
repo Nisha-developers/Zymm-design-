@@ -22,7 +22,7 @@ export default function BottomInput({ onSend, voiceChatId = null, className = ''
     // Changed div to form to handle Enter key automatically
     <form 
       onSubmit={handleSubmit} 
-      className="fixed bottom-10 left-1/2 z-10 flex w-[calc(100%-2rem)] -translate-x-1/2 items-center gap-3 px-6 pb-6 pt-2 md:left-[calc(50%+var(--sidebar-center-offset))] md:w-[var(--desktop-input-width)] md:px-0"
+            className={`fixed bottom-0 left-1/2 z-10 flex w-[calc(100%-2rem)] -translate-x-1/2 items-center gap-3 px-6 pb-6 pt-2 md:left-[calc(50%+var(--sidebar-center-offset))] md:w-[var(--desktop-input-width)] md:px-0 ${className}`}
     >
       {/* Input Field - Your exact styles preserved */}
       <div className="flex-1">
