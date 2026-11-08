@@ -1,6 +1,6 @@
 export default function AssistantInput({ onMicClick, onMessageClick, onClose, isListening = false }) {
   return (
-    <div className="mx-auto flex w-full max-w-md items-center justify-between px-8 pb-6 pt-3 shrink-0 relative z-10"> 
+    <div className="mx-auto flex w-full max-w-md items-center justify-between px-8 pb-6 pt-3 md:pb-10 md:pt-5 shrink-0 relative z-10"> 
       <button
         onClick={onClose}
         aria-label="Close assistant"
