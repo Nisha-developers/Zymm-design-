@@ -40,7 +40,7 @@ export default function DesktopHomeInput({ onSend, placeholder = 'Ask me anythin
           className="flex h-11 w-11 items-center justify-center rounded-full bg-black/5 dark:bg-white/10"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 136" fill="none">
-  <g fill="#E9FFB8">
+  <g fill="#fff">
     <rect x="2" y="51.2" width="8" height="33.6" rx="4"/>
     <rect x="18" y="34.4" width="8" height="67.2" rx="4"/>
     <rect x="34" y="0" width="8" height="136.01" rx="4"/>
