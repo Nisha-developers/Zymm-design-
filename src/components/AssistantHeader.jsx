@@ -35,7 +35,7 @@ export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }
 
       {/* Subtitle (Listening...) */}
       {subtitle && (
-        <p className="text-[#3FE0A5] text-[15px] mt-1 font-medium">
+        <p className="text-[#3FE0A5] text-[15px] md:text-[16px] mt-1 font-medium">
           {subtitle}
         </p>
       )}
