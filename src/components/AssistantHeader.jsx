@@ -2,7 +2,7 @@ export default function AssistantHeader({ title, subtitle, onBack, onMenuClick }
   return (
     <div className="flex flex-col items-center w-full px-6 md:px-10 pt-[clamp(12px,4dvh,40px)]">
       {/* Top Nav Bar (Back, Title, Menu) */}
-      <div className="flex w-full  max-w-md md:max-w-none items-center justify-between md:justify-start gap-3">
+      <div className="flex w-full  max-w-md md:max-w-none items-center justify-between  gap-3">
         {/* Back Button */}
         <button 
           onClick={onBack}
