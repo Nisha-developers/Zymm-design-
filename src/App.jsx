@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import TopicPage from './pages/TopicPage';
 import AssistantPage from './pages/AssistantPage';
 import JobCardsPage from './pages/JobCardsPage';
+import AdSetPage from './pages/AdSetPage';
 
 function PageLayout({
   children,
@@ -145,6 +146,7 @@ export default function App() {
           </PageLayout>
         }
       />
+      <Route path="/ads" element={<AdSetPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
