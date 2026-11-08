@@ -21,7 +21,7 @@ export default function PromptPills() {
               state: { initialMessage: text },
             })
           }
-          className="relative bg-green-grad rounded-full px-4 py-1.5 opacity-50 flex items-center justify-center cursor-pointer"
+          className="relative bg-green-grad rounded-full px-4 py-1.5 md:px-5 md:py-2.5 opacity-50 flex items-center justify-center cursor-pointer"
         >
           {/* Text is wrapped to bypass the parent's opacity */}
           <span className="relative z-10 text-white text-[11px] font-medium leading-none">
