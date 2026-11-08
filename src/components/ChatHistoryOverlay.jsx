@@ -12,7 +12,7 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
   }, [history]);
 
   return (
-    <div ref={chatRef} className="mx-auto min-h-0 w-full max-w-md flex-1 overflow-y-auto px-6 pt-4 hide-scrollbar flex flex-col gap-3">
+    <div ref={chatRef} className="mx-auto min-h-0 w-full max-w-md md:max-w-2xl flex-1 overflow-y-auto px-6 pt-4 hide-scrollbar flex flex-col gap-3">
       {history.map((msg, idx) => (
         <div 
           key={msg.id ?? idx}
