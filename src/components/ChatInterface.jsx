@@ -26,6 +26,8 @@ export default function ChatInterface({
   const answered = useRef(null);
 
   useEffect(() => {
+    // Desktop home hero: stay at the top until a chat starts
+    if (messages.length === 0 && window.matchMedia?.('(min-width: 768px)').matches) return;
     scrollRef.current?.scrollIntoView?.({ behavior: 'smooth' });
   }, [messages.length, isProcessing]);
 
