@@ -80,7 +80,7 @@ export default function ChatInterface({
   return (
     <div className="flex min-h-screen flex-col">
       <div className={`px-4 ${isHomepageChat && messages.length === 0 ? '' : 'pt-20'} pb-28`}>
-        {messages.length === 0 && emptyState}
+                {messages.length === 0 && (typeof emptyState === 'function' ? emptyState({ onSend: handleSend }) : emptyState)}
                 {messages.map((msg, i) => (
           <ChatMessage
             key={msg.id}
