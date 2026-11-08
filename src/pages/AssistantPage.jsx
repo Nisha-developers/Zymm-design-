@@ -52,6 +52,21 @@ export default function AssistantPage({ onMenuClick }) {
     };
   }, []);
 
+  // This screen is exactly one screen tall: lock page scroll so nothing (white gap) shows below it.
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    const prev = { html: html.style.overflow, body: body.style.overflow, over: html.style.overscrollBehavior };
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    html.style.overscrollBehavior = 'none';
+    return () => {
+      html.style.overflow = prev.html;
+      body.style.overflow = prev.body;
+      html.style.overscrollBehavior = prev.over;
+    };
+  }, []);
+
   const setLevel = (level) => {
     levelRef.current = level;
   };
