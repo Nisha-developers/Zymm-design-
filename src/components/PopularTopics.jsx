@@ -13,7 +13,7 @@ setRepeatIcons((prev)=>[...prev, 5, 6, 7])
     }
     
   return (
-    <div className="mt-8 px-4 mb-24 md:mx-auto md:w-full md:max-w-[960px]">
+    <div className="mt-8 px-4 mb-24 md:mx-auto md:w-full md:max-w-[960px] md:hidden">
       <div className="flex justify-between items-center mb-4">
       <h2 className="text-white text-[18px] md:mt-8 font-semibold [text-shadow:1px_2px_4px_rgba(0,0,0,1)]">
   Popular Topics
