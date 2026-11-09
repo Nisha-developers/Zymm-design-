@@ -1,153 +1,114 @@
 import { useState } from 'react';
-import { CaretDown } from './icons';
+import { CaretDown, CaretUp } from './icons';
+import { GrayButton, Label, SearchField, SelectBox } from './fields';
+import LocationPicker from './LocationPicker';
 
-const NUMS = Array.from({ length: 31 }, (_, i) => String(i));
-
-const inputCls =
-  'h-[40px] w-full rounded-[4px] border border-[#dcdcdc] bg-white px-3 text-[14px] text-[#222] shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] outline-none placeholder:text-[#c4c4c4] focus:border-[#1877f2]';
-
-function FieldLabel({ children, strong = false, className = '' }) {
-  return (
-    <label className={`block text-[14px] leading-[18px] ${strong ? 'text-[#1c1c1c]' : 'text-[#555]'} ${className}`}>
-      {children}
-    </label>
-  );
-}
-
-function Check({ checked, onChange, children, ariaLabel }) {
-  return (
-    <label className="flex cursor-pointer items-center gap-4 text-[14px] leading-[20px] text-[#555]">
-      <input type="checkbox" aria-label={ariaLabel} checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer sr-only" />
-      <span className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-[4px] border border-[#dcdcdc] bg-white shadow-[inset_0_1px_2px_rgba(0,0,0,0.05)] peer-checked:border-[#1877f2] peer-checked:bg-[#1877f2] peer-focus-visible:ring-2 peer-focus-visible:ring-[#1877f2]/40 [&>svg]:hidden peer-checked:[&>svg]:block">
-        <svg width="16" height="16" viewBox="0 0 12 12" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="m2.5 6.2 2.4 2.3 4.6-5" />
-        </svg>
-      </span>
-      {children}
-    </label>
-  );
-}
-
-function ExpSelect({ value, onChange, ariaLabel }) {
-  return (
-    <div className="relative">
-      <select
-        aria-label={ariaLabel}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="h-[38px] w-[82px] cursor-pointer appearance-none bg-transparent pl-[16px] pr-8 text-[18px] text-[#222] outline-none"
-      >
-        {NUMS.map((n) => (
-          <option key={n} value={n}>{n}</option>
-        ))}
-      </select>
-      <CaretDown size={10} className="pointer-events-none absolute right-[12px] top-1/2 -translate-y-1/2 text-[#666]" />
-    </div>
-  );
-}
+const AGES = Array.from({ length: 53 }, (_, i) => String(13 + i));
 
 export default function AudienceForm() {
-  const [expMin, setExpMin] = useState('0');
-  const [expMax, setExpMax] = useState('0');
-  const [reachOut, setReachOut] = useState(false);
-  const [ex1, setEx1] = useState(false);
-  const [ex2, setEx2] = useState(false);
+  const [tab, setTab] = useState('new');
+  const [ageMin, setAgeMin] = useState('18');
+  const [ageMax, setAgeMax] = useState('35');
+  const [expand, setExpand] = useState(false);
+  const [showOptions, setShowOptions] = useState(true);
 
   return (
-    <section className="pb-10 text-[#1c1c1c]">
-      {/* ---------- Part 1 ---------- */}
-      <h2 className="px-[15px] pb-[10px] pt-[2px] text-[16px] font-medium">Audience</h2>
-      <div className="border-t border-[#dcdcdc]" />
+    <section className="px-3 pb-[6px] pt-[2px] md:px-[13px]">
+      <h2 className="text-[13px] font-bold text-[#1c1e21]">Audience</h2>
 
-      <div className="px-[15px]">
-        <div className="mt-[12px] flex items-center gap-24" role="tablist">
-          <button type="button" role="tab" className="cursor-pointer text-[17px] font-medium">Create new search</button>
-          <button type="button" role="tab" className="cursor-pointer text-[17px] font-medium">Use Saved Search</button>
-        </div>
-
-        <FieldLabel className="mt-[6px]">Job title</FieldLabel>
-        <input type="text" placeholder="Enter career here" className={`${inputCls} mt-[4px]`} />
-        <FieldLabel className="mt-[10px]">Job title 2</FieldLabel>
-        <input type="text" placeholder="Enter career here" className={`${inputCls} mt-[4px]`} />
-        <FieldLabel className="mt-[10px]">Job title 3</FieldLabel>
-        <input type="text" placeholder="Enter career here" className={`${inputCls} mt-[4px]`} />
-      </div>
-
-      <div className="mt-[18px] border-t border-[#dcdcdc]" />
-
-      {/* ---------- Part 2 ---------- */}
-      <div className="px-[15px]">
-        <FieldLabel className="mt-[18px]">Locations</FieldLabel>
-        <div className="mt-[8px] rounded-[2px] bg-[#f4f4f4] px-[12px] pb-[18px] pt-[16px]">
-          <FieldLabel>Country</FieldLabel>
-          <input type="text" defaultValue="United States" className={`${inputCls} mt-[8px] !h-[38px] text-[#222]`} />
-        </div>
+      <div className="mt-[16px] flex border-b border-[#dddfe2] text-[12px]" role="tablist">
         <button
           type="button"
-          aria-label="Add another location"
-          className="mt-[14px] flex h-[34px] w-full cursor-pointer items-center rounded-[2px] border border-[#e0e0e0] bg-white pl-[88px] text-[#666]"
+          role="tab"
+          aria-selected={tab === 'new'}
+          onClick={() => setTab('new')}
+          className={`-mb-px cursor-pointer border-b-2 px-[7px] pb-[8px] font-bold ${tab === 'new' ? 'border-[#1877f2] text-[#1c1e21]' : 'border-transparent text-[#606770]'}`}
         >
-          <CaretDown size={11} />
+          Create New Audience
         </button>
-        <button type="button" className="mt-[8px] cursor-pointer text-[14px] font-medium text-[#4aa3e6]">Add up to 3 Locations</button>
-
-        <FieldLabel strong className="mt-[26px]">Experience</FieldLabel>
-        <div className="mt-[8px] flex w-fit items-center rounded-[4px] border border-[#dcdcdc] bg-white">
-          <ExpSelect ariaLabel="Minimum experience" value={expMin} onChange={setExpMin} />
-          <span className="h-[28px] w-px bg-[#dcdcdc]" />
-          <ExpSelect ariaLabel="Maximum experience" value={expMax} onChange={setExpMax} />
-        </div>
-
-        <FieldLabel className="mt-[22px]">Parameters</FieldLabel>
-        <input type="text" className={`${inputCls} mt-[8px]`} />
-
-        <FieldLabel className="mt-[20px]">Detailed Targeting</FieldLabel>
-        <input type="text" className={`${inputCls} mt-[8px]`} />
-
-        {/* Added: Exclusions field (sits between image 2 and image 3) */}
-        <FieldLabel className="mt-[20px]">Exclusions</FieldLabel>
-        <input type="text" className={`${inputCls} mt-[8px]`} />
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === 'saved'}
+          onClick={() => setTab('saved')}
+          className={`-mb-px ml-[14px] flex cursor-pointer items-center gap-[5px] border-b-2 px-[7px] pb-[8px] ${tab === 'saved' ? 'border-[#1877f2] font-bold text-[#1c1e21]' : 'border-transparent text-[#606770]'}`}
+        >
+          Use Saved Audience <CaretDown size={8} />
+        </button>
       </div>
 
-      {/* ---------- Part 3 ---------- */}
-      <div className="px-[15px]">
-        <FieldLabel strong className="mt-[22px]">Include</FieldLabel>
-        <div className="mt-[8px]">
-          <Check checked={reachOut} onChange={setReachOut} ariaLabel="Have Zymm reach out to recruiters">
-            <span className="max-w-[560px] text-[#555]">
-              Have Zymm reach out to recruiters discovered on your behalf in order to help boost your chances.
-            </span>
-          </Check>
-        </div>
+      {/* Custom audiences */}
+      <div className="mt-[21px] flex items-center justify-between">
+        <Label>Custom Audiences</Label>
+        <button type="button" className="flex cursor-pointer items-center gap-[6px] pr-[11px] text-[12px] text-[#4b4f56]">
+          Create New <CaretDown size={8} />
+        </button>
+      </div>
+      <SearchField placeholder="Search existing audiences" className="mt-[4px]" />
+      <GrayButton className="mt-[10px]">Exclude</GrayButton>
 
-        <div className="mt-[20px] rounded-[2px] bg-[#f4f4f4] px-[16px] pb-[12px] pt-[18px]">
-          <label htmlFor="skills" className="text-[14px] text-[#1c1c1c]">
-            Skills <span className="ml-1 text-[11px] text-[#5bd0f0]">(Be sure to separate with comma &quot;,&quot;)</span>
-          </label>
-          <input id="skills" type="text" className={`${inputCls} mt-[10px]`} />
-        </div>
+      {/* Locations */}
+      <Label className="mt-[16px] mb-[5px]">Locations</Label>
+      <LocationPicker />
 
-        <FieldLabel strong className="mt-[14px]">Exclude</FieldLabel>
-        <input type="text" className={`${inputCls} mt-[8px] max-w-[460px]`} />
-
-        <div className="mt-[22px] flex flex-wrap items-center gap-x-[28px] gap-y-3">
-          <Check checked={ex1} onChange={setEx1} ariaLabel="Exclude option one">Exclude</Check>
-          <Check checked={ex2} onChange={setEx2} ariaLabel="Exclude option two">Exclude</Check>
-        </div>
+      {/* Age */}
+      <Label className="mt-[10px] mb-[6px]">Age</Label>
+      <div className="flex gap-[5px]">
+        <SelectBox ariaLabel="Minimum age" value={ageMin} onChange={setAgeMin} options={AGES} className="w-[72px]" />
+        <SelectBox ariaLabel="Maximum age" value={ageMax} onChange={setAgeMax} options={AGES} className="w-[70px]" />
       </div>
 
-      <div className="mt-[20px] border-t border-[#dff0f0]" />
-      <div className="px-[15px]">
-        <div className="mt-[16px]">
-          <input type="text" aria-label="Extra field" className={`${inputCls} !h-[38px] !w-[142px]`} />
-        </div>
-      </div>
-      <div className="mt-[16px] border-t border-[#e8e8e8]" />
+      {/* Gender */}
+      <Label className="mt-[13px]">Gender</Label>
+      <p className="mt-[5px] text-[12px] leading-[15px] text-[#1c1e21]">All genders</p>
 
-      <div className="px-[15px]">
-        <FieldLabel className="mt-[14px]">Interests</FieldLabel>
-        <input type="text" className={`${inputCls} mt-[8px]`} />
-      </div>
+      {/* Detailed targeting */}
+      <Label className="mt-[14px]">Detailed Targeting</Label>
+      <Label small info className="mt-[1px] !text-[#4b4f56]">Include people who match</Label>
+      <SearchField
+        placeholder="Add demographics, interests or behaviors"
+        className="mt-[7px] !h-[28px]"
+        right={
+          <span className="flex shrink-0 gap-[6px] text-[11.5px] text-[#606770]">
+            <span>Suggestions</span>
+            <button type="button" className="cursor-pointer text-[#1c1e21]">Browse</button>
+          </span>
+        }
+      />
+      <GrayButton className="mt-[9px]">Exclude</GrayButton>
+
+      {/* Expansion */}
+      <Label small info className="mt-[8px] !text-[#4b4f56]">Detailed Targeting Expansion</Label>
+      <label className="mt-[2px] flex cursor-pointer items-start gap-[7px] text-[12px] leading-[16px] text-[#1c1e21]">
+        <input type="checkbox" checked={expand} onChange={(e) => setExpand(e.target.checked)} className="peer sr-only" />
+        <span className="mt-[2px] flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-[3px] border border-[#bec3c9] bg-white peer-checked:border-[#1877f2] peer-checked:bg-[#1877f2] peer-focus-visible:ring-2 peer-focus-visible:ring-[#1877f2]/40 [&>svg]:hidden peer-checked:[&>svg]:block">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 6.2 2.4 2.3 4.6-5" /></svg>
+        </span>
+        Reach people beyond your detailed targeting selections when it&apos;s likely to improve performance.
+      </label>
+
+      {/* Languages */}
+      <Label className="mt-[11px]">Languages</Label>
+      <p className="mt-[5px] text-[12px] leading-[15px] text-[#1c1e21]">All languages</p>
+
+      <div className="mt-[6px] border-t border-[#dddfe2]" />
+      <button
+        type="button"
+        onClick={() => setShowOptions((v) => !v)}
+        className="mt-[13px] flex cursor-pointer items-center gap-[5px] text-[12px] leading-[15px] text-[#365899]"
+      >
+        {showOptions ? 'Hide Options' : 'Show More Options'} {showOptions ? <CaretUp size={8} /> : <CaretDown size={8} />}
+      </button>
+
+      {showOptions && (
+        <div>
+          <Label className="mt-[15px]">Connections</Label>
+          <p className="mt-[6px] text-[12px] leading-[15px] text-[#1c1e21]">All people</p>
+        </div>
+      )}
+
+      <div className="mt-[16px] border-t border-[#dddfe2]" />
+      <GrayButton className="mt-[16px]">Save This Audience</GrayButton>
     </section>
   );
 }
