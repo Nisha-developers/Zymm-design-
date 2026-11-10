@@ -16,6 +16,37 @@
   
   /* Other colors */
   --color-border-neutral: #303030;
+
+
+    --color-void:        #07070d;   /* page background            */
+  --color-surface:     #12131c;   /* card base                  */
+  --color-surface-2:   #0d0e16;   /* mobile nav                 */
+  --color-surface-3:   #1a1c35;   /* roas gradient top          */
+   --color-dash-light: #8B1C4A; 
+  
+  /* The dark transition and base colors */
+  --color-dash-mid: #2A2139;
+  --color-dash-dark: #1A1625;
+  
+  /* ── Purple / Indigo (brand) ─────────────────── */
+  --color-brand-300:   #c4b5fd;
+  --color-brand-400:   #a5b4fc;
+  --color-brand-500:   #818cf8;
+  --color-brand-600:   #6366f1;
+  --color-brand-700:   #8b5cf6;
+  --color-brand-fuchsia: #c084fc;
+
+  /* ── Accents ─────────────────────────────────── */
+  --color-accent-orange: #f59e0b;
+  --color-accent-sky:    #38bdf8;
+  --color-accent-pink:   #f472b6;
+  --color-accent-violet: #7c3aed;
+
+  /* ── Semantic ────────────────────────────────── */
+  --color-positive:    #34d399;   /* emerald-400                */
+  --color-negative:    #f87171;   /* red-400                    */
+  --color-muted:       #94a3b8;   /* slate-400                  */
+  --color-pin-bg:      #2a2c3a;
 }
 @font-face {
   font-family: "Helvetica Neue";
@@ -67,5 +98,14 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .card-bar { animation: none; }
+}
+@utility bg-dashboard-gradient {
+  /* Deep magenta fading into the dark background */
+  background-image: linear-gradient(
+    135deg, 
+    var(--color-dash-light) 0%,   /* Deep Pinkish Red / Magenta */
+    var(--color-dash-mid) 45%,    /* Dark Purple Transition */
+    var(--color-dash-dark) 100%   /* Very Dark */
+  );
 }
   /* Dark mode page gradient */
