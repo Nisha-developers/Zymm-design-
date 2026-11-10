@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { PlusIcon, SendIcon, SparkleIcon, WaveIcon } from './desktop/icons';
 
-// Desktop-only hero input for the homepage empty state (hidden below md).
-export default function DesktopHomeInput({ onSend, placeholder = 'Ask me anything...' }) {
+// Desktop-only hero input for the homepage empty state (the mobile home uses BottomInput).
+export default function DesktopHomeInput({ onSend, placeholder = 'Ask Zymm a question or make a request...' }) {
   const [input, setInput] = useState('');
 
   const submit = () => {
@@ -17,50 +18,52 @@ export default function DesktopHomeInput({ onSend, placeholder = 'Ask me anythin
         e.preventDefault();
         submit();
       }}
-      className="hidden md:flex w-full max-w-[760px] flex-col rounded-3xl border border-black/10 bg-white p-4 text-gray-900 shadow-lg dark:border-white/10 dark:bg-[#2A2A33] dark:text-white"
+      className="desk-glass relative flex h-[clamp(130px,25vh,240px)] w-full flex-col rounded-[26px] p-4"
     >
-      <textarea
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            submit();
-          }
-        }}
-        rows={3}
-        placeholder={placeholder}
-        className="w-full resize-none bg-transparent px-2 pt-1 text-[16px] outline-none placeholder:text-gray-400 dark:placeholder:text-white/50"
-      />
-      <div className="mt-3 flex items-center justify-end gap-3">
-        <Link
-          to="/assistant"
-          state={{ conversationId: null }}
-          aria-label="Talk to Zymm"
-          className="flex h-11 w-11 items-center justify-center rounded-full bg-black/5 dark:bg-white/10"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 136" fill="none" height="20" width="25">
-  <g fill="#000">
-    <rect x="2" y="51.2" width="8" height="33.6" rx="4"/>
-    <rect x="18" y="34.4" width="8" height="67.2" rx="4"/>
-    <rect x="34" y="0" width="8" height="136.01" rx="4"/>
-    <rect x="50" y="25.6" width="8" height="84.8" rx="4"/>
-    <rect x="66" y="34.4" width="8" height="67.2" rx="4"/>
-    <rect x="82" y="27.2" width="8" height="81.6" rx="4"/>
-    <rect x="98" y="57.6" width="8" height="20.8" rx="4"/>
-  </g>
-</svg>
-        </Link>
+      <div className="flex flex-1 items-start gap-2 px-1 pt-1">
+        <SparkleIcon width={18} height={18} className="mt-[3px] shrink-0 text-black/70 dark:text-white/80" />
+        <textarea
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              submit();
+            }
+          }}
+          placeholder={placeholder}
+          aria-label="Message Zymm"
+          className="h-full w-full resize-none bg-transparent text-[15px] text-black outline-none placeholder:text-black/40 dark:text-white dark:placeholder:text-white/40"
+        />
+      </div>
+
+      <div className="flex items-center justify-between">
         <button
-          type="submit"
-          aria-label="Send"
-          className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-input-grad shadow-lg"
+          type="button"
+          aria-label="Add attachment"
+          className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-black/[0.03] text-black/80 hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:hover:bg-white/[0.1]"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
-          </svg>
+          <PlusIcon />
         </button>
+
+        <div className="flex items-center gap-2">
+          <Link
+            to="/assistant"
+            state={{ conversationId: null }}
+            aria-label="Talk to Zymm"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-black/[0.03] text-black/80 hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/[0.06] dark:text-white dark:hover:bg-white/[0.1]"
+          >
+            <WaveIcon width={16} height={16} />
+          </Link>
+          <button
+            type="submit"
+            aria-label="Send"
+            disabled={!input.trim()}
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-desk-accent text-white shadow-[0_4px_18px_rgba(117,244,140,0.3)] transition-opacity disabled:cursor-default disabled:opacity-80"
+          >
+            <SendIcon width={15} height={15} />
+          </button>
+        </div>
       </div>
     </form>
   );

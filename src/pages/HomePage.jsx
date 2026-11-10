@@ -1,5 +1,5 @@
 import ChatInterface from '../components/ChatInterface';
-import DesktopHomeInput from '../components/DesktopHomeInput';
+import DesktopHome from '../components/desktop/DesktopHome';
 import Header from '../components/Header';
 import PhoneMockup from '../components/PhoneMockup';
 import PopularTopics from '../components/PopularTopics';
@@ -12,11 +12,13 @@ export default function HomePage() {
         isHomepageChat
         emptyState={({ onSend }) => (
           <div className="flex flex-col">
-            <div className="flex flex-col md:min-h-[80vh] md:items-center md:justify-center">
+            {/* Mobile home (unchanged) */}
+            <div className="flex flex-col md:hidden">
               <Header />
-              <DesktopHomeInput onSend={onSend} />
               <PromptPills />
             </div>
+            {/* Desktop home */}
+            <DesktopHome onSend={onSend} />
             <PopularTopics />
           </div>
         )}

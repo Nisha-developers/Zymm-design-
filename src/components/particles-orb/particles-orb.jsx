@@ -71,6 +71,8 @@ export const ParticlesOrb = ({
   colorFrom = '#f0abfc',
   colorTo = '#818cf8',
   levelRef,
+  dotThickness = DOT_THICKNESS,
+  brightness = 1,
   label = 'Assistant orb',
   className,
   ref: forwardedRef,
@@ -114,8 +116,8 @@ export const ParticlesOrb = ({
 
     const center = size / 2;
     const smallness = Math.min(1, size / 140);
-    const dotScale = (0.55 + 0.45 * smallness) * DOT_THICKNESS;
-    const alphaScale = smallness * smallness;
+    const dotScale = (0.55 + 0.45 * smallness) * dotThickness;
+    const alphaScale = smallness * smallness * brightness;
     const baseRadius = center * 0.62;
     const n = PARTICLE_COUNT;
     const px = new Float32Array(n);
@@ -308,7 +310,7 @@ export const ParticlesOrb = ({
     return () => {
       drawRef.current = null;
     };
-  }, [size, frameRef]);
+  }, [size, frameRef, dotThickness, brightness]);
 
   return (
     <div
@@ -331,4 +333,4 @@ export const ParticlesOrb = ({
       <canvas ref={canvasRef} style={{ width: size, height: size }} />
     </div>
   );
-};
+};

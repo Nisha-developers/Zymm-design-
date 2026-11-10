@@ -16,19 +16,15 @@ function PageLayout({
   floatingSidebarTogglePosition = 'left',
   showSidebarToggle = true,
 }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(
-    () =>
-      showSidebar &&
-      typeof window !== 'undefined' &&
-      window.matchMedia('(min-width: 768px)').matches,
-  );
+  // Starts closed on every screen size; the hamburger opens it.
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!showSidebar) return undefined;
 
     const desktopQuery = window.matchMedia('(min-width: 768px)');
-    const syncSidebarWithViewport = (event) => {
-      setIsSidebarOpen(event.matches);
+    const syncSidebarWithViewport = () => {
+      setIsSidebarOpen(false);
     };
 
     desktopQuery.addEventListener('change', syncSidebarWithViewport);
@@ -65,8 +61,10 @@ function PageLayout({
             showSidebar && isSidebarOpen ? '160px' : '0px',
           '--sidebar-width-offset':
             showSidebar && isSidebarOpen ? '320px' : '0px',
-          '--desktop-content-padding':
-            showSidebar && !isSidebarOpen ? '128px' : '80px',
+          '--desktop-content-padding': '0px',
+          // room the desktop top bars leave for the floating hamburger
+          '--desktop-toggle-space':
+            showSidebar && showFloatingSidebarToggle && !isSidebarOpen ? '64px' : '0px',
           '--desktop-input-width':
             showSidebar && isSidebarOpen
               ? 'calc(100% - 320px - 160px)'

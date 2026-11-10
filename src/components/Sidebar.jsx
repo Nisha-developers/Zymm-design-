@@ -81,7 +81,7 @@ export default function Sidebar({
           
           /* Desktop Styles */
                     md:sticky md:top-0 md:left-auto md:h-screen md:self-start md:shadow-none md:bg-white/30 dark:md:bg-black
-          ${isOpen ? 'md:w-[320px] md:translate-x-0' : 'md:w-0 md:-translate-x-full md:overflow-hidden'}
+          ${isOpen ? 'md:w-[320px] md:translate-x-0' : 'md:w-0 md:-translate-x-full md:overflow-hidden md:border-r-0'}
         `}
       >
         {/* Header Area (Icons) */}
