@@ -1,93 +1,94 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ModelPicker } from './desktop/DesktopChat';
+import { PlusIcon } from './desktop/icons';
+import { useAutoGrow } from '../lib/use-auto-grow';
 
+// Mobile composer (desktop uses DesktopHomeInput / DesktopChatInput).
+// Glowing gradient-border box: text on top, controls underneath. The text grows, then scrolls.
 export default function BottomInput({ onSend, voiceChatId = null, className = '' }) {
   const [input, setInput] = useState('');
   const [isSending, setIsSending] = useState(false);
+  const textareaRef = useRef(null);
+  useAutoGrow(textareaRef, input, 132);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     if (!input.trim() || isSending) return;
 
     setIsSending(true);
-    onSend(input); // Trigger the send to the chat interface
-    
-    setInput(''); // Clear input
-    
+    onSend(input);
+    setInput('');
+
     // Brief delay before returning to default state
-    setTimeout(() => setIsSending(false), 500); 
+    setTimeout(() => setIsSending(false), 500);
   };
 
+  const actionClass =
+    'flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-input-grad shadow-[0_0_16px_rgba(117,244,140,0.35)] cursor-pointer transition-all active:scale-95';
+
   return (
-    // Changed div to form to handle Enter key automatically
-    <form 
-      onSubmit={handleSubmit} 
-            className={`fixed bottom-0 left-1/2 z-10 flex w-[calc(100%-2rem)] -translate-x-1/2 items-center gap-3 px-6 pb-6 pt-2 md:left-[calc(50%+var(--sidebar-center-offset))] md:w-[var(--desktop-input-width)] md:px-0 ${className}`}
+    <form
+      onSubmit={handleSubmit}
+      className={`mob-composer-fade fixed bottom-0 left-0 right-0 z-10 px-4 pt-6 pb-[max(16px,env(safe-area-inset-bottom))] ${className}`}
     >
-      {/* Input Field - Your exact styles preserved */}
-      <div className="flex-1">
-        <input
-          type="text"
+      <div className="mob-glow-box relative rounded-[24px] p-3">
+        <textarea
+          ref={textareaRef}
+          rows={1}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="w-full h-[52px] rounded-full px-5 text-gray-900 bg-white  placeholder-white/60 outline-none border-[#303030] shadow-inner"
-          placeholder=""
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              handleSubmit();
+            }
+          }}
+          placeholder="Ask anything..."
+          aria-label="Message Zymm"
+          className="thin-scroll block w-full resize-none bg-transparent px-1 pt-0.5 text-[15px] leading-[1.45] text-[#1B1B1B] outline-none [overflow-wrap:anywhere] placeholder:text-black/40 dark:text-white dark:placeholder:text-white/45"
         />
-      </div>
 
-      {/* Circular Gradient Button - Your exact styles preserved + dynamic icons */}
-      {/* Processing / Send Button */}
-{isSending ? (
-  <button
-    type="submit"
-    disabled
-    className="w-[52px] h-[52px] shrink-0 rounded-full bg-input-grad flex items-center justify-center shadow-lg"
-  >
-    <div className="w-4 h-4 bg-white rounded-sm animate-pulse" />
-  </button>
-) : input.trim() ? (
-  <button
-    type="submit"
-    className="w-[52px] h-[52px] shrink-0 rounded-full bg-input-grad flex items-center justify-center shadow-lg cursor-pointer transition-all"
-  >
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="22" y1="2" x2="11" y2="13" />
-      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-    </svg>
-  </button>
-) : (
-  <Link
-    to="/assistant"
-    state={{ conversationId: voiceChatId }}
-    className="w-[52px] h-[52px] shrink-0 rounded-full bg-input-grad flex items-center justify-center shadow-lg cursor-pointer transition-all"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 112 136"
-      fill="none"
-      className="w-5 h-5"
-    >
-      <g fill="#E9FFB8">
-        <rect x="2" y="51.2" width="8" height="33.6" rx="4" />
-        <rect x="18" y="34.4" width="8" height="67.2" rx="4" />
-        <rect x="34" y="0" width="8" height="136.01" rx="4" />
-        <rect x="50" y="25.6" width="8" height="84.8" rx="4" />
-        <rect x="66" y="34.4" width="8" height="67.2" rx="4" />
-        <rect x="82" y="27.2" width="8" height="81.6" rx="4" />
-        <rect x="98" y="57.6" width="8" height="20.8" rx="4" />
-      </g>
-    </svg>
-  </Link>
-)}
+        <div className="mt-3 flex items-center gap-2">
+          <button
+            type="button"
+            aria-label="Add attachment"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-black/[0.03] text-black/70 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80"
+          >
+            <PlusIcon width={16} height={16} />
+          </button>
+          <ModelPicker className="rounded-full border border-black/10 bg-black/[0.03] dark:border-white/10 dark:bg-white/[0.06]" />
+
+          <div className="ml-auto">
+            {isSending ? (
+              <button type="submit" disabled className={actionClass}>
+                <div className="h-3.5 w-3.5 animate-pulse rounded-sm bg-white" />
+              </button>
+            ) : input.trim() ? (
+              <button type="submit" aria-label="Send" className={actionClass}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13" />
+                  <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+              </button>
+            ) : (
+              <Link to="/assistant" state={{ conversationId: voiceChatId }} aria-label="Talk to Zymm" className={actionClass}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 136" fill="none" className="h-[18px] w-[18px]">
+                  <g fill="#E9FFB8">
+                    <rect x="2" y="51.2" width="8" height="33.6" rx="4" />
+                    <rect x="18" y="34.4" width="8" height="67.2" rx="4" />
+                    <rect x="34" y="0" width="8" height="136.01" rx="4" />
+                    <rect x="50" y="25.6" width="8" height="84.8" rx="4" />
+                    <rect x="66" y="34.4" width="8" height="67.2" rx="4" />
+                    <rect x="82" y="27.2" width="8" height="81.6" rx="4" />
+                    <rect x="98" y="57.6" width="8" height="20.8" rx="4" />
+                  </g>
+                </svg>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
     </form>
   );
 }

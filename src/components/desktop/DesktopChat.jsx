@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useAutoGrow } from '../../lib/use-auto-grow';
 import { ShareButton } from './DesktopTopBar';
 import { ArrowUpIcon, ChevronDownIcon, CloseIcon, PlusIcon, QuoteIcon } from './icons';
 
@@ -46,7 +47,7 @@ export function ReplyBubble({ anchor, onReply }) {
   );
 }
 
-function ModelPicker() {
+export function ModelPicker({ className = '' }) {
   const [model, setModel] = useState(MODELS[0]);
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -61,7 +62,7 @@ function ModelPicker() {
   }, [open]);
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className={`relative ${className}`}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -97,6 +98,18 @@ function ModelPicker() {
 // Desktop chat composer: sticks to the bottom of the thread column (md and up only).
 export function DesktopChatInput({ onSend, reply, onClearReply, inputRef, disabled = false }) {
   const [input, setInput] = useState('');
+  const localRef = useRef(null);
+  const textareaRef = inputRef ?? localRef;
+  useAutoGrow(textareaRef, input, 240);
+  const [expanded, setExpanded] = useState(false);
+
+  // Switch to the stacked layout once the text needs more than one line; back to one row when cleared.
+  useLayoutEffect(() => {
+    const el = textareaRef.current;
+    if (!el || !input || expanded) return;
+    const lineHeight = parseFloat(getComputedStyle(el).lineHeight) || 24;
+    if (input.includes('\n') || el.scrollHeight > lineHeight * 1.8) setExpanded(true); // measured from the DOM
+  }, [input, expanded, textareaRef]);
 
   const submit = (e) => {
     e?.preventDefault();
@@ -104,6 +117,7 @@ export function DesktopChatInput({ onSend, reply, onClearReply, inputRef, disabl
     if (!text || disabled) return;
     onSend(reply ? `Replying to "${reply}": ${text}` : text);
     setInput('');
+    setExpanded(false);
     onClearReply?.();
   };
 
@@ -119,34 +133,54 @@ export function DesktopChatInput({ onSend, reply, onClearReply, inputRef, disabl
             </button>
           </div>
         )}
+        {/* Like ChatGPT: one row while the text fits; once it wraps, the text takes the full width
+            on top and the buttons drop to a row underneath. The scrollbar sits on the box's right edge. */}
         <form
           onSubmit={submit}
-          className="flex h-14 items-center gap-2 rounded-[20px] border border-black/10 bg-white px-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] dark:border-white/[0.08] dark:bg-[#141414] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)]"
+          className={`grid items-end rounded-[24px] border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.08)] dark:border-white/[0.08] dark:bg-[#141414] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] ${
+            expanded
+              ? "grid-cols-[auto_1fr_auto] gap-y-1 py-3 pl-3 pr-1.5 [grid-template-areas:'text_text_text'_'plus_._actions']"
+              : "grid-cols-[auto_1fr_auto] gap-x-1 py-2.5 pl-3 pr-3 [grid-template-areas:'plus_text_actions']"
+          }`}
         >
           <button
             type="button"
             aria-label="Add attachment"
-            className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-black/70 hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/5"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-black/70 [grid-area:plus] hover:bg-black/5 dark:text-white/70 dark:hover:bg-white/5"
           >
-            <PlusIcon width={16} height={16} />
+            <PlusIcon width={18} height={18} />
           </button>
-          <input
-            ref={inputRef}
+          <textarea
+            ref={textareaRef}
+            rows={1}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value);
+              if (!e.target.value) setExpanded(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submit();
+              }
+            }}
             placeholder={reply ? 'Reply to the highlighted text...' : 'Reply to Zymm...'}
             aria-label="Message Zymm"
-            className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-black outline-none placeholder:text-black/35 dark:text-white dark:placeholder:text-white/35"
+            className={`thin-scroll w-full min-w-0 resize-none self-center bg-transparent text-[15px] leading-[1.6] text-black outline-none [grid-area:text] [overflow-wrap:anywhere] placeholder:text-black/35 dark:text-white dark:placeholder:text-white/35 ${
+              expanded ? 'pl-2 pr-3' : 'px-1 py-1'
+            }`}
           />
-          <ModelPicker />
-          <button
-            type="submit"
-            aria-label="Send"
-            disabled={!input.trim() || disabled}
-            className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-desk-accent text-white transition-opacity disabled:cursor-default disabled:opacity-50"
-          >
-            <ArrowUpIcon width={15} height={15} />
-          </button>
+          <div className={`flex items-center gap-1.5 [grid-area:actions] ${expanded ? 'pr-1.5' : ''}`}>
+            <ModelPicker />
+            <button
+              type="submit"
+              aria-label="Send"
+              disabled={!input.trim() || disabled}
+              className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-desk-accent text-white transition-opacity disabled:cursor-default disabled:opacity-50"
+            >
+              <ArrowUpIcon width={16} height={16} />
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -33,7 +33,7 @@ export default function DesktopHomeInput({ onSend, placeholder = 'Ask Zymm a que
           }}
           placeholder={placeholder}
           aria-label="Message Zymm"
-          className="h-full w-full resize-none bg-transparent text-[15px] text-black outline-none placeholder:text-black/40 dark:text-white dark:placeholder:text-white/40"
+          className="thin-scroll h-full w-full resize-none bg-transparent text-[15px] text-black outline-none placeholder:text-black/40 dark:text-white dark:placeholder:text-white/40"
         />
       </div>
 

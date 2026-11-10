@@ -159,7 +159,7 @@ export default function AssistantPage({ onMenuClick }) {
   const hasStartedConversation = messages.some((message) => message.role === 'user');
 
   return (
-    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-page-gradient">
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-orb-shell text-white">
       <div className="shrink-0">
         <AssistantHeader
           title="Personal Assistant"

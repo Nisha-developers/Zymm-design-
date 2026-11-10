@@ -83,3 +83,12 @@ export const QuoteIcon = (p) => (
 export const CloseIcon = (p) => (
   <svg {...base} {...p}><path d="M6 6l12 12M18 6 6 18" /></svg>
 );
+export const CopyIcon = (p) => (
+  <svg {...base} {...p}><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2.5" /><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5" /></svg>
+);
+export const PencilIcon = (p) => (
+  <svg {...base} {...p}><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z" /><path d="m13.5 6.5 4 4" /></svg>
+);
+export const CheckIcon = (p) => (
+  <svg {...base} {...p}><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+);

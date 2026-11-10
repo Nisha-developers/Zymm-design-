@@ -66,8 +66,8 @@ export default function ChatInterface({
   };
 
   useEffect(() => {
-    // Desktop home hero: stay at the top until a chat starts
-    if (messages.length === 0 && window.matchMedia?.('(min-width: 768px)').matches) return;
+    // Home screen: stay at the top until a chat starts
+    if (messages.length === 0) return;
     scrollRef.current?.scrollIntoView?.({ behavior: 'smooth' });
   }, [messages.length, isProcessing]);
 
@@ -124,7 +124,7 @@ export default function ChatInterface({
   return (
     <div className="flex min-h-screen flex-col">
       {!isHomeEmpty && <DesktopChatHeader title={conv?.title} />}
-      <div className={`px-4 ${isHomeEmpty ? 'md:p-0' : 'pt-20 md:px-8 md:pt-6 md:pb-4'} pb-28`}>
+      <div className={`px-4 ${isHomeEmpty ? 'pb-28 md:p-0' : 'pt-20 pb-40 md:px-8 md:pt-6 md:pb-4'}`}>
                 {messages.length === 0 && (typeof emptyState === 'function' ? emptyState({ onSend: handleSend }) : emptyState)}
         <div className="md:mx-auto md:w-full md:max-w-[640px]" onMouseUp={handleSelection}>
                 {messages.map((msg, i) => (

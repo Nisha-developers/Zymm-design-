@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import EditableText from './EditableText';
+import UserBubble from './UserBubble';
 export default function ChatHistory({ history, onEdit, onOpenCards }) {
   const chatRef = useRef(null);
 
@@ -16,17 +16,15 @@ export default function ChatHistory({ history, onEdit, onOpenCards }) {
       {history.map((msg, idx) => (
         <div 
           key={msg.id ?? idx}
-          className={`flex max-w-full flex-col ${msg.sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`}
+          className={`flex max-w-full flex-col ${msg.sender === 'user' ? 'w-full items-end' : 'self-start items-start'}`}
         >
           {msg.sender === 'user' ? (
-            <div className="rounded-xl bg-[#1A1A1A] px-4 py-3 text-[15px] leading-snug text-white shadow-md">
-              <EditableText
-                text={msg.text}
-                edited={msg.edited}
-                onSave={onEdit && msg.id ? (text) => onEdit(msg.id, text) : undefined}
-                writeEdit={true}
-              />
-            </div>
+            <UserBubble
+              variant="orb"
+              text={msg.text}
+              edited={msg.edited}
+              onEdit={onEdit && msg.id ? (text) => onEdit(msg.id, text) : undefined}
+            />
           ) : (
             <div className="text-white text-[17px] md:text-[20px] md:text-center font-medium leading-snug whitespace-pre-wrap [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
               {msg.text}
