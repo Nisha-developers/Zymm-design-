@@ -10,10 +10,10 @@ export default function AdSetPage() {
   const [tab, setTab] = useState('edit');
 
   return (
-    <div className="min-h-screen bg-white font-[Helvetica,Arial,sans-serif] text-[#1c1e21]">
+    <div className="min-h-screen bg-[#F0F2F5] font-[Helvetica,Arial,sans-serif] text-[#1c1e21]">
       <div className="flex  flex-col md:flex-row">
         {treeOpen && (
-          <div className="shrink-0 border-b border-[#dddfe2] pb-4 md:w-[316px] md:border-b-0 md:border-r md:pb-0">
+          <div className="shrink-0 border-b border-[#dddfe2]  pb-4 md:w-[316px] md:border-b-0 md:border-r md:pb-0 bg-white">
             <CampaignTree />
           </div>
         )}
@@ -28,7 +28,7 @@ export default function AdSetPage() {
           />
 
           {tab === 'edit' ? (
-            <div className="flex flex-1 flex-col md:flex-row">
+            <div className="flex flex-1 flex-col md:flex-row ml-3 bg-white">
               <div className="min-w-0 flex-1">
                 <AudienceForm />
               </div>

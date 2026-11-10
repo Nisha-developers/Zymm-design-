@@ -2,7 +2,7 @@ import { AdIcon, ChevronRight, DotsIcon, EyeIcon, FolderIcon, GridIcon, PanelIco
 
 export default function TopBar({ onToggleTree, isDraft, onToggleDraft, tab, onTab }) {
   return (
-    <header className="px-[10px] pt-[14px]">
+    <header className="px-[10px] pt-[14px] bg-white">
       <div className="flex items-center justify-between gap-2">
         <div className="flex min-w-0 items-center gap-[10px]">
           <button
