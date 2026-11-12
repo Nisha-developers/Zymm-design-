@@ -10,11 +10,16 @@ export default function IconWrapper({
       type={type}
       onClick={onClick}
       aria-label={ariaLabel}
-      className={`relative flex h-[44px] w-[44px] shrink-0 items-center dark:bg-white/10 dark:text-white dark:hover:bg-white/20' justify-center rounded-full transition-all cursor-pointer ${
-        variant === 'gradient'
-          ? 'bg-input-grad text-white shadow-sm'
-          : 'bg-white/90 text-gray-700 hover:bg-white'
-      }`}
+      className={
+        variant === 'plain'
+          ? // Just the icon: no circle behind it (white lines in dark mode, dark lines in light mode).
+            'relative flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-transparent text-[#1B1B1B] transition-colors cursor-pointer hover:bg-black/5 dark:text-white dark:hover:bg-white/10'
+          : `relative flex h-[44px] w-[44px] shrink-0 items-center dark:bg-white/10 dark:text-white dark:hover:bg-white/20' justify-center rounded-full transition-all cursor-pointer ${
+              variant === 'gradient'
+                ? 'bg-input-grad text-white shadow-sm'
+                : 'bg-white/90 text-gray-700 hover:bg-white'
+            }`
+      }
     >
       {/* Wrapper to keep icons perfectly centered */}
       <span className="flex items-center justify-center">
