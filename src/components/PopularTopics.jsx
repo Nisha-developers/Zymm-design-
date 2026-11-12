@@ -13,7 +13,7 @@ setRepeatIcons((prev)=>[...prev, 5, 6, 7])
     }
     
   return (
-    <div className="mt-8 px-4 mb-24 md:mx-auto md:w-full md:max-w-[960px] md:hidden">
+    <div className="mt-8 px-4 md:mx-auto md:w-full md:max-w-[960px] md:hidden">
       <div className="flex justify-between items-center mb-4">
       <h2 className="text-[#1B1B1B] text-[18px] md:mt-8 font-semibold dark:text-white dark:[text-shadow:1px_2px_4px_rgba(0,0,0,1)]">
   Popular Topics
@@ -21,7 +21,7 @@ setRepeatIcons((prev)=>[...prev, 5, 6, 7])
         <button className={`text-black/60 dark:text-white text-[13px] cursor-pointer ${seeAll ? 'hidden' : ''} `} onClick={viewAll}>See all</button>
       </div>
 
-      <div className="grid grid-cols-2 gap-1 md:grid-cols-4 md:gap-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-3">
         {repeatIcons.map((item) => (
           <button
             type="button"

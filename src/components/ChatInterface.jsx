@@ -122,9 +122,9 @@ export default function ChatInterface({
   const isHomeEmpty = isHomepageChat && messages.length === 0;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-[100dvh] flex-col">
       {!isHomeEmpty && <DesktopChatHeader title={conv?.title} />}
-      <div className={`px-4 ${isHomeEmpty ? 'pb-28 md:p-0' : 'pt-20 pb-40 md:px-8 md:pt-6 md:pb-4'}`}>
+      <div className={`px-4 ${isHomeEmpty ? 'pb-[150px] md:p-0' : 'pt-20 pb-40 md:px-8 md:pt-6 md:pb-4'}`}>
                 {messages.length === 0 && (typeof emptyState === 'function' ? emptyState({ onSend: handleSend }) : emptyState)}
         <div className="md:mx-auto md:w-full md:max-w-[640px]" onMouseUp={handleSelection}>
                 {messages.map((msg, i) => (
