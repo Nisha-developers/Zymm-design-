@@ -21,14 +21,13 @@ export default function PromptPills() {
               state: { initialMessage: text },
             })
           }
-          className="relative bg-green-grad rounded-full px-4 py-1.5 md:px-5 md:py-2.5 opacity-50 flex items-center justify-center cursor-pointer"
+          className="glass-card rounded-full px-4 py-2 md:px-5 md:py-2.5 flex items-center justify-center cursor-pointer transition-transform active:scale-95"
         >
-          {/* Text is wrapped to bypass the parent's opacity */}
-          <span className="relative z-10 text-white text-[11px] md:text-[14px] font-medium leading-none">
+          <span className="text-[#1B1B1B] dark:text-white/90 text-[11px] md:text-[14px] font-medium leading-none">
             {text}
           </span>
         </button>
       ))}
     </div>
   );
-}
+}
