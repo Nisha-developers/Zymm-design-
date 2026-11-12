@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import IconWrapper from './components/IconWrapper';
 import Sidebar from './components/Sidebar';
 import HomePage from './pages/HomePage';
@@ -30,6 +30,13 @@ function PageLayout({
     desktopQuery.addEventListener('change', syncSidebarWithViewport);
     return () => desktopQuery.removeEventListener('change', syncSidebarWithViewport);
   }, [showSidebar]);
+
+  // Desktop home: the hamburger is just the white lines, no gradient circle behind it.
+  const { pathname } = useLocation();
+  const plainDesktopToggle =
+    pathname === '/'
+      ? 'md:[&>button]:bg-none md:[&>button]:bg-transparent md:[&>button]:shadow-none md:[&>button]:text-black md:dark:[&>button]:text-white md:[&>button:hover]:bg-black/5 md:dark:[&>button:hover]:bg-white/10'
+      : '';
 
   const toggleSidebar = () => {
     setIsSidebarOpen((previousState) => !previousState);
@@ -77,7 +84,7 @@ function PageLayout({
               floatingSidebarTogglePosition === 'right'
                 ? 'right-4 md:right-6'
                 : 'left-4 md:left-6'
-            } ${floatingSidebarTogglePosition === 'right' ? 'hidden md:block' : ''}`}
+            } ${floatingSidebarTogglePosition === 'right' ? 'hidden md:block' : ''} ${plainDesktopToggle}`}
           >
             <IconWrapper onClick={toggleSidebar} aria-label="Open sidebar">
               <svg
