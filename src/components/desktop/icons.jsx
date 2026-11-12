@@ -92,3 +92,39 @@ export const PencilIcon = (p) => (
 export const CheckIcon = (p) => (
   <svg {...base} {...p}><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
 );
+export const BriefcaseIcon = (p) => (
+  <svg {...base} {...p}><rect x="3.5" y="7" width="17" height="12.5" rx="2.5" /><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7M3.5 12.5h17" /></svg>
+);
+export const MailIcon = (p) => (
+  <svg {...base} {...p}><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" /><path d="m4.5 7 7.5 6 7.5-6" /></svg>
+);
+export const PieIcon = (p) => (
+  <svg {...base} {...p}><path d="M12 3.5v8.5h8.5A8.5 8.5 0 1 1 12 3.5z" /><path d="M15 3.8A8.5 8.5 0 0 1 20.2 9H15z" /></svg>
+);
+export const TrendIcon = (p) => (
+  <svg {...base} {...p}><path d="M4 17l5.5-5.5 4 4L20 9" /><path d="M15 9h5v5" /></svg>
+);
+export const ResumeIcon = (p) => (
+  <svg {...base} {...p}><path d="M6.5 3.5h8l3.5 3.5v13.5h-11.5z" /><path d="M14.5 3.5V7H18" /><circle cx="11" cy="11" r="2" /><path d="M8 16.5a3.2 3.2 0 0 1 6 0" /></svg>
+);
+export const MicIcon = (p) => (
+  <svg {...base} {...p}><rect x="9" y="3.5" width="6" height="11" rx="3" /><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5" /></svg>
+);
+export const CoinsIcon = (p) => (
+  <svg {...base} {...p}><ellipse cx="9" cy="7" rx="5.5" ry="2.5" /><path d="M3.5 7v4c0 1.4 2.5 2.5 5.5 2.5s5.5-1.1 5.5-2.5V7" /><path d="M9.5 15.4c.7 1.2 2.9 2.1 5.5 2.1 3 0 5.5-1.1 5.5-2.5v-4c0-1.2-1.8-2.2-4.3-2.4" /></svg>
+);
+export const GlobeIcon = (p) => (
+  <svg {...base} {...p}><circle cx="12" cy="12" r="8.5" /><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.4-3.5-8.5s1-5.9 3.5-8.5z" /></svg>
+);
+export const ChatBubbleIcon = (p) => (
+  <svg {...base} {...p}><path d="M4 5.5h16v10.5H9l-5 4z" /><path d="M8 9.5h8M8 12.5h5" /></svg>
+);
+export const TargetIcon = (p) => (
+  <svg {...base} {...p}><circle cx="12" cy="12" r="8.5" /><circle cx="12" cy="12" r="4.5" /><circle cx="12" cy="12" r="1" fill="currentColor" /></svg>
+);
+export const LinkedInIcon = (p) => (
+  <svg {...base} {...p}><rect x="3.5" y="3.5" width="17" height="17" rx="3" /><path d="M8 10.5v6M8 7.5v.01M11.5 16.5v-6M11.5 13c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5v3.5" /></svg>
+);
+export const GraduationIcon = (p) => (
+  <svg {...base} {...p}><path d="M2.5 9.5 12 5l9.5 4.5L12 14z" /><path d="M6.5 11.5v4c1.5 1.5 3.5 2.2 5.5 2.2s4-.7 5.5-2.2v-4M21.5 9.5v5" /></svg>
+);

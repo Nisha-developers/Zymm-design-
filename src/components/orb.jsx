@@ -17,11 +17,23 @@ const STATE_MAP = {
 const EMERALD = '#2D8583';
 const NEON = '#36A49F';
 
-const calcSize = (compact) =>
-  Math.round(Math.max(
-    compact ? 180 : 220,
-    Math.min(window.innerWidth * 0.94, window.innerHeight * (compact ? 0.42 : 0.58), compact ? 460 : 540),
+// The canvas has empty padding around the sphere, so it may be a little wider than the screen.
+// Height: whatever is left after the header, the mic controls and room for the chat text,
+// so the mic is never pushed off the bottom (short laptop screens, browser zoom, Safari bars).
+const calcSize = (compact) => {
+  const desktop = window.innerWidth >= 768;
+  const chrome = desktop ? 290 : 250; // header + mic controls
+  const chatRoom = compact ? 190 : 50; // space kept for Zymm's text / your message
+  return Math.round(Math.max(
+    compact ? 160 : 180,
+    Math.min(
+      window.innerWidth * 1.06,
+      window.innerHeight * (compact ? 0.47 : 0.64),
+      window.innerHeight - chrome - chatRoom,
+      compact ? 520 : 600,
+    ),
   ));
+};
 
 function useOrbSize(compact) {
   const [size, setSize] = useState(() => calcSize(compact));
@@ -55,4 +67,4 @@ export default function Orb({ state = 'idle', levelRef, compact = false }) {
       </div>
     </div>
   );
-}
+}

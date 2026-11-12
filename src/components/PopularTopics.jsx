@@ -1,57 +1,80 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { POPULAR_TOPICS } from '../data/popularTopics';
 
+// Mobile home. Collapsed: one row showing exactly 2 cards; swipe sideways for more.
+// "See all": 4 rows that swipe sideways together.
 export default function PopularTopics() {
-    const navigate = useNavigate();
-    const [seeAll, setSeeAll] = useState(false);
-    const [repeatIcons, setRepeatIcons] = useState([1, 2, 3, 4]);
-   
-       
-    const viewAll = () =>{
-setSeeAll(true);
-setRepeatIcons((prev)=>[...prev, 5, 6, 7])
-    }
-    
+  const navigate = useNavigate();
+  const [seeAll, setSeeAll] = useState(false);
+  const [page, setPage] = useState(0);
+  const scrollerRef = useRef(null);
+
+  const pages = Math.ceil(POPULAR_TOPICS.length / 2);
+
+  const toggle = () => {
+    setSeeAll((v) => !v);
+    setPage(0);
+    scrollerRef.current?.scrollTo({ left: 0 });
+  };
+
+  // Which pair of cards is in view (for the dots under the collapsed row)
+  const onScroll = (e) => {
+    const el = e.currentTarget;
+    const step = el.clientWidth - 32 + 12; // two cards + the gap after them
+    setPage(Math.round(el.scrollLeft / step));
+  };
+
+  const open = (topic) =>
+    navigate(`/topics/${topic.id}`, { state: { initialMessage: topic.text } });
+
   return (
-    <div className="mt-8 px-4 md:mx-auto md:w-full md:max-w-[960px] md:hidden">
-      <div className="flex justify-between items-center mb-4">
-      <h2 className="text-[#1B1B1B] text-[18px] md:mt-8 font-semibold dark:text-white dark:[text-shadow:1px_2px_4px_rgba(0,0,0,1)]">
-  Popular Topics
-</h2>
-        <button className={`text-black/60 dark:text-white text-[13px] cursor-pointer ${seeAll ? 'hidden' : ''} `} onClick={viewAll}>See all</button>
+    <div className="-mx-4 mt-6 md:hidden">
+      <div className="mb-2 flex items-center justify-between px-4">
+        <h2 className="text-[18px] font-semibold text-[#1B1B1B] dark:text-white">Popular Topics</h2>
+        <button type="button" onClick={toggle} className="cursor-pointer text-[13px] text-black/55 dark:text-white/55">
+          {seeAll ? 'Show less' : 'See all'}
+        </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-3">
-        {repeatIcons.map((item) => (
-          <button
-            type="button"
-            key={item}
-            onClick={() =>
-              navigate(`/topics/${item}`, {
-                state: { initialMessage: 'Try not to be on the Penny' },
-              })
-            }
-            className="glass-card rounded-2xl p-4 flex flex-col justify-between text-left"
-            style={{height: '128px' }}
-          >
-            {/* Icon container with exact angle */}
-            <div 
-              className="w-8 h-8 rounded-full border border-black/15 dark:border-white/20 flex items-center justify-center text-[#1B1B1B] dark:text-white"
-              style={{ transform: 'rotate(88.85deg)' }}
+      {/* Edge-to-edge scroller; scroll-padding keeps snapped cards aligned with the page margin */}
+      <div
+        ref={scrollerRef}
+        onScroll={seeAll ? undefined : onScroll}
+        className={`hide-scrollbar grid snap-x snap-mandatory scroll-px-4 auto-cols-[calc((100%-12px)/2)] grid-flow-col gap-3 overflow-x-auto overscroll-x-contain px-4 pt-1 pb-6 ${
+          seeAll ? 'grid-rows-4' : 'grid-rows-1'
+        }`}
+      >
+        {POPULAR_TOPICS.map((topic) => {
+          const Icon = topic.icon;
+          return (
+            <button
+              type="button"
+              key={topic.id}
+              onClick={() => open(topic)}
+              className="glass-card flex h-[152px] snap-start flex-col justify-between rounded-[20px] p-4 text-left transition-transform active:scale-[0.98]"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-                <path d="M2 2l7.586 7.586"></path>
-                <circle cx="11" cy="11" r="2"></circle>
-              </svg>
-            </div>
-            <p className="text-[#1B1B1B] dark:text-white self-start text-[13px] leading-snug">
-              Try not to be on the Penny
-            </p>
-          </button>
-        ))}
+              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white/50 text-[#1B1B1B] dark:border-white/10 dark:bg-white/[0.08] dark:text-white/85">
+                <Icon width={20} height={20} />
+              </span>
+              <p className="line-clamp-2 text-[13px] leading-snug text-[#1B1B1B]/80 dark:text-white/80">{topic.text}</p>
+            </button>
+          );
+        })}
       </div>
+
+      {!seeAll && (
+        <div className="-mt-3 flex justify-center gap-1.5" aria-hidden="true">
+          {Array.from({ length: pages }, (_, i) => (
+            <span
+              key={i}
+              className={`h-1.5 rounded-full transition-all ${
+                i === page ? 'w-4 bg-[#75F48C]/80' : 'w-1.5 bg-black/20 dark:bg-white/25'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+}

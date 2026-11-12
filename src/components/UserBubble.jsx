@@ -4,9 +4,9 @@ import { useAutoGrow } from '../lib/use-auto-grow';
 
 const BUBBLE = {
   // Chat pages (mobile + desktop): neutral pill that fits its text, like ChatGPT/Claude.
-  chat: 'rounded-[20px] bg-black/[0.07] px-4 py-2.5 text-[15px] leading-relaxed text-[#1B1B1B] dark:bg-white/[0.09] dark:text-white md:text-[14px]',
+  chat: 'rounded-xl bg-black/[0.07] px-4 py-2.5 text-[15px] leading-relaxed text-[#1B1B1B] dark:bg-white/[0.09] dark:text-white md:text-[14px]',
   // Orb page: sits on the dark gradient.
-  orb: 'rounded-[20px] bg-white/[0.08] px-4 py-2.5 text-[15px] leading-snug text-white backdrop-blur-sm',
+  orb: 'rounded-xl bg-white/[0.08] px-4 py-2.5 text-[15px] leading-snug text-white backdrop-blur-sm',
 };
 
 const ACTION =
