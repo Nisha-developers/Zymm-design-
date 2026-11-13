@@ -8,6 +8,7 @@ import AssistantPage from './pages/AssistantPage';
 import JobCardsPage from './pages/JobCardsPage';
 import AdSetPage from './pages/AdSetPage';
 import AnalysisPage from './pages/AnalysisPage';
+import ChatPage from './pages/ChatPage';
 
 function PageLayout({
   children,
@@ -147,6 +148,7 @@ export default function App() {
       />
       <Route path="/ads" element={<AdSetPage />} />
       <Route path="/analysis" element={<AnalysisPage/>} />
+      <Route path="/newchat" element={<ChatPage onClose={() => navigate('/')} />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

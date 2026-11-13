@@ -55,6 +55,20 @@
   --color-negative:    #f87171;   /* red-400                    */
   --color-muted:       #94a3b8;   /* slate-400                  */
   --color-pin-bg:      #2a2c3a;
+
+  --font-sans: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+
+  --color-phone: #3d3d3d;
+  --color-top: #2f2f2f;
+  --color-card: #4b4b4b;
+  --color-panel: #2a2a2a;
+  --color-user: #2c2c2c;
+  --color-muted: #c4c4c4;
+  --color-line: #8a8a8a;
+  --color-online: #9bc53d;
+
+  --animate-rise: rise .22s ease-out;
+  --animate-blink: blink 1s infinite;
 }
 @font-face {
   font-family: "Helvetica Neue";
@@ -62,6 +76,18 @@
   font-weight: 100 900;
   font-style: normal;
 }
+ @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes blink {
+    0%, 60%, 100% { opacity: 0.3; transform: none; }
+    30%           { opacity: 1; transform: translateY(-3px); }
+  }
+
+
+.no-scrollbar::-webkit-scrollbar { width: 0; }
+.no-scrollbar { scrollbar-width: none; } /*
 
 body {
   margin: 0;
