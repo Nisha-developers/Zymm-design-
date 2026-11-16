@@ -60,7 +60,7 @@ const SectionThree = () => {
         ref={imgRef}
         src={sectionThreeImg}
         alt="Future net worth projection shown on the Autonomous app"
-        className="block h-auto max-md:h-[110vh] w-full rounded-[28px] bg-[#d2d4d8] will-change-transform md:rounded-[36px]"
+        className="block h-auto max-md:h-[110vh] max-md:object-cover w-full rounded-[28px] bg-[#d2d4d8] will-change-transform md:rounded-[36px]"
       />
       <Heading lines={'Autonomous surfaces what needs your attention and proactively takes the next step.'} className="mt-30"/>
     </section>
