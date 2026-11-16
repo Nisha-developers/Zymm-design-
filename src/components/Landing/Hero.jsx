@@ -93,13 +93,13 @@ const Hero = () => {
 
       {/* Hero card */}
         <div
-        className={`mx-auto w-[calc(100%-60px)] origin-top pb-10 transition-all duration-1000 ease-out ${
+        className={`mx-auto md:w-[calc(100%-60px)] w-[calc(100%-30px)] origin-top pb-10 transition-all duration-1000 ease-out ${
           loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >
         <div
           ref={cardRef}
-          className="relative aspect-[1/1.9] origin-top overflow-hidden rounded-[32px] bg-[#d2d4d8] will-change-transform md:aspect-auto md:h-[750px] md:rounded-[28px] lg:h-[1020px]"
+          className="relative aspect-[1/1.9] origin-top overflow-hidden rounded-[32px] bg-[#d2d4d8] will-change-transform md:aspect-auto md:rounded-[28px] h-auto"
         >
           <img
             src={heroPhone}
