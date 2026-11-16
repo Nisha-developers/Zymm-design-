@@ -6,6 +6,7 @@ import SectionFive from "../components/Landing/SectionFive";
 import SectionSix from "../components/Landing/SectionSix";
 import SectionSeven from "../components/Landing/SectionSeven";
 import Footer from "../components/Landing/Footer";
+import ChatWidget from "../components/Landing/ChatWidget";
 
 
 const LandingPage = () => {
@@ -19,6 +20,7 @@ const LandingPage = () => {
        <SectionSix />
        <SectionSeven />
        <Footer />
+       <ChatWidget />
     </main>
   );
 };
