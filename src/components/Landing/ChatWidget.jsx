@@ -26,7 +26,7 @@ const ChatWidget = () => {
       {/* Popup panel: taller than it is wide */}
       <div
         aria-hidden={!open}
-        className={`fixed bottom-24 right-4 z-50 h-[min(620px,calc(100dvh_-_17rem))] w-[min(380px,calc(100vw_-_2rem))] origin-bottom-right overflow-hidden rounded-3xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed bottom-24 right-4 z-50 h-[min(620px,calc(100dvh_-_25rem))] w-[min(380px,calc(100vw_-_6rem))] origin-bottom-right overflow-hidden rounded-3xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           open
             ? "translate-y-0 scale-100 opacity-100"
             : "pointer-events-none translate-y-6 scale-50 opacity-0"
