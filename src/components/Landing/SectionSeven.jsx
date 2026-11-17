@@ -58,7 +58,7 @@ const FAQS = [
 ];
 
 const SectionSeven = () => {
-  const [open, setOpen] = useState(0); // first item open by default
+  const [open, setOpen] = useState(null); // first item open by default
 
   return (
     <section className="w-full bg-[#eeeff1] px-5  px-1p b-16 md:px-3 md:pb-28">
