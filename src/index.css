@@ -87,7 +87,7 @@
 
 
 .no-scrollbar::-webkit-scrollbar { width: 0; }
-.no-scrollbar { scrollbar-width: none; } /*
+.no-scrollbar { scrollbar-width: none; } 
 
 body {
   margin: 0;

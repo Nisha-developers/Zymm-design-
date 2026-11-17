@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import IconWrapper from './components/IconWrapper';
 import Sidebar from './components/Sidebar';
 import HomePage from './pages/HomePage';
@@ -107,6 +107,7 @@ function PageLayout({
 }
 
 export default function App() {
+   const navigate = useNavigate();
   return (
     <Routes>
       <Route
