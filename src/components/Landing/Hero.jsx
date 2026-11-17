@@ -1,6 +1,7 @@
 import { useEffect, useRef,  useState } from "react";
 import heroPhone from "../../assets/hero-phone.png";
 import RotatingText from "./RotatingText";
+import ShrinkOnExit from "./ShrinkOnExit";
 
 const START = 0.9; // card width (fraction of screen) at top of page
 const GAP = 3; // px left on each side once fully scrolled
@@ -92,23 +93,30 @@ const Hero = () => {
       </header>
 
       {/* Hero card */}
+      
         <div
         className={`mx-auto md:w-[calc(100%-60px)] w-[calc(100%-30px)] origin-top pb-10 transition-all duration-1000 ease-out ${
           loaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >
+           <ShrinkOnExit>
         <div
           ref={cardRef}
           className="relative aspect-[1/1.9] origin-top overflow-hidden rounded-[32px] bg-[#d2d4d8] will-change-transform md:aspect-auto md:rounded-[28px] h-auto"
         >
+        
           <img
             src={heroPhone}
             alt="Autonomous app on a phone held in hand"
             className="h-full w-full object-cover  object-center md:object-cover"
           />
-           <RotatingText />
+           
+          
         </div>
+          </ShrinkOnExit>
+         <RotatingText />
       </div>
+   
     </section>
   );
 };

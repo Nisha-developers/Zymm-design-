@@ -84,7 +84,7 @@ const SectionSix = () => {
 
   return (
     <div>
-    <section ref={sectionRef} className="relative h-[300vh] w-full bg-[#eeeff1]">
+    <section ref={sectionRef} className="relative md:h-[300vh] h-[150vh] w-full bg-[#eeeff1]">
       <div className="sticky top-0 h-screen p-1.5 md:p-3">
         <div
           className="relative h-full overflow-hidden rounded-[32px] md:rounded-[40px]"

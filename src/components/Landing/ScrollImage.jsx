@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import ShrinkOnExit from "./ShrinkOnExit";
 
 const EASE = 0.1; // lower = smoother/slower
 
@@ -47,17 +48,21 @@ const ScrollImage = ({ src, alt = "", offset = 80, second = false }) => {
   }, [offset]);
 
   return (
+       
     <section
       ref={sectionRef}
       className={`w-full overflow-hidden bg-[#eeeff1] px-1 ${second ? 'pb-3': 'pb-12'} md:px-3 md:${second ? 'pb-3': 'pb-20'}`}
     >
+      <ShrinkOnExit>
       <img
         ref={imgRef}
         src={src}
         alt={alt}
         className="block h-auto w-full rounded-[28px] bg-[#d2d4d8] will-change-transform max-md:h-[110vh] max-md:object-cover md:rounded-[36px]"
       />
+       </ShrinkOnExit>
     </section>
+   
   );
 };
 
