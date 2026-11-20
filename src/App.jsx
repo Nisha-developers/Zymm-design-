@@ -10,6 +10,9 @@ import AdSetPage from './pages/AdSetPage';
 import AnalysisPage from './pages/AnalysisPage';
 import ChatPage from './pages/ChatPage';
 import LandingPage from './pages/LandingPage';
+import Popups1 from './components/Popups/Popups1';
+import Popups2 from './components/Popups/Popups2';
+import Popups3 from './components/Popups/Popups3';
 
 function PageLayout({
   children,
@@ -150,6 +153,9 @@ export default function App() {
       />
       <Route path="/ads" element={<AdSetPage />} />
       <Route path="/analysis" element={<AnalysisPage/>} />
+      <Route path="/pop1" element={<Popups1/>} />
+      <Route path="/pop2" element={<Popups2/>} />
+      <Route path="/pop3" element={<Popups3/>} />
        <Route path="/landing" element={<LandingPage/>} />
       <Route path="/newchat" element={<ChatPage onClose={() => navigate('/')} />} />
       <Route path="*" element={<Navigate to="/" replace />} />

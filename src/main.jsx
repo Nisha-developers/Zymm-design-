@@ -6,12 +6,13 @@ import App from './App.jsx'
 import { recoverStaleTasks } from './lib/chatStore'
 import { initTheme } from './lib/theme'
 
+
 recoverStaleTasks()
 initTheme()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+       <App /> 
     </BrowserRouter>
   </StrictMode>,
 )
